@@ -1,0 +1,9 @@
+{
+  "generator-serverless-scaffolder": {
+    "promptValues": {
+      "authorName": "<%= authorName %>",
+      "authorEmail": "<%= authorEmail %>",
+      "authorUrl": "<%= authorUrl %>"
+    }
+  }
+}

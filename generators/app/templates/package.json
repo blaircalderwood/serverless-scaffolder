@@ -1,5 +1,5 @@
 {
-  "name": "<%= yeomanProjectName %>",
+  "name": "<%= projectName %>",
   "version": "1.0.0",
   "description": "",
   "main": ".eslintrc.js",

@@ -14,8 +14,18 @@ module.exports = class extends Generator {
       {
         type: 'input',
         name: 'projectName',
-        message: 'What is the name of the Lambda you wish to create?',
-      }
+        message: 'Lambda name:',
+      },
+      {
+        type: 'input',
+        name: 'authorName',
+        message: 'Author name:',
+      },
+      {
+        type: 'input',
+        name: 'authorEmail',
+        message: 'Author email:',
+      },
     ];
 
     return this.prompt(prompts).then(props => {
@@ -25,16 +35,24 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    const mappings = { 
+      projectName: this.props.projectName,
+      authorName: this.props.authorName,
+      authorEmail: this.props.authorEmail,
+      authorUrl: '',
+    };
+
+    this.destinationRoot(this.props.projectName);
     this.fs.copyTpl(
-      this.templatePath('./main-generator/**/*'),
-      this.destinationRoot(this.props.projectName),
-      { projectName: this.props.projectName }
+      this.templatePath('./**/*'),
+      this.destinationPath('./'),
+      mappings,
     );
-    
+
     this.fs.copyTpl(
       this.templatePath('./**/.*'),
-      this.destinationRoot('./'),
-      { yeomanProjectName: this.props.projectName }
+      this.destinationPath('./'),
+      mappings,
     );
   }
 
