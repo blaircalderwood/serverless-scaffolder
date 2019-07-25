@@ -26,6 +26,12 @@ module.exports = class extends Generator {
         name: 'authorEmail',
         message: 'Author email:',
       },
+      {
+        type: 'number',
+        name: 'codeCoverage',
+        message: 'What is the minimum acceptable % of code coverage in your project?',
+        default: '80',
+      },
     ];
 
     return this.prompt(prompts).then(props => {
@@ -40,6 +46,7 @@ module.exports = class extends Generator {
       authorName: this.props.authorName,
       authorEmail: this.props.authorEmail,
       authorUrl: '',
+      codeCoverage: this.props.codeCoverage,
     };
 
     this.destinationRoot(this.props.projectName);
