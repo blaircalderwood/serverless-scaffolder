@@ -40,8 +40,4 @@ module.exports = class extends Generator {
       mappings
     );
   }
-
-  install() {
-    this.npmInstall();
-  }
 };
