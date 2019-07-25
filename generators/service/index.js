@@ -1,7 +1,7 @@
 'use strict';
 const Generator = require('yeoman-generator');
 
-const { toSentenceCase, toKebabCase } = require('../../utils/strings.util');
+const { toSentenceCase, toKebabCase, toCamelCase } = require('../../utils/strings.util');
 
 module.exports = class extends Generator {
   prompting() {
@@ -26,17 +26,18 @@ module.exports = class extends Generator {
       serviceName, 
       className: toSentenceCase(serviceName),
     }
+    const folderName = toCamelCase(serviceName);
     const fileName = toKebabCase(serviceName);
 
     this.fs.copyTpl(
       this.templatePath('./service-name.service.js'),
-      this.destinationPath(`./src/services/${serviceName}/${fileName}.service.js`),
+      this.destinationPath(`./src/services/${folderName}/${fileName}.service.js`),
       mappings
     );
 
     this.fs.copyTpl(
       this.templatePath('./service-name.spec.js'),
-      this.destinationPath(`./src/services/${serviceName}/${fileName}.spec.js`),
+      this.destinationPath(`./src/services/${folderName}/${fileName}.spec.js`),
       mappings
     );
   }
