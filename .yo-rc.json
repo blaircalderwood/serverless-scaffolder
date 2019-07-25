@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Blair Calderwood",
+      "authorEmail": "blair.calderwood@slalom.com",
+      "authorUrl": ""
+    }
+  }
+}
