@@ -1,3 +1,5 @@
-exports.handler = async event => {
-  // TODO: Return stuff
+module.exports.handler = async event => {
+  return {
+    message: "Welcome to the Serverless Scaffolder!"
+  }
 };
