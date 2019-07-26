@@ -1,38 +1,53 @@
-# generator-serverless-scaffolder [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> Generate Lambda functions deployable with Terraform IAC. Includes Webpack, Jest testing and an optional API Gateway module
+# Serverless Scaffolder
+The Serverless Scaffolder is a highly opinionated AWS Lambda generator built using the Yeoman scaffolding tool. This tool is fantastic for spinning up new Lambda projects very quickly and so works well in conjunction with a microservices based architecture.
 
-## Installation
-
-First, install [Yeoman](http://yeoman.io) and generator-serverless-scaffolder using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
-
+## Getting Started
+Install Yeoman and the scaffolder via npm:
 ```bash
 npm install -g yo
 npm install -g generator-serverless-scaffolder
 ```
 
-Then generate your new project:
-
+Move into the directory you wish to create your app in (e.g. projects/) and run the generator:
 ```bash
 yo serverless-scaffolder
 ```
 
-## Getting To Know Yeoman
+Answer the questions when prompted. The app will now be generated with everything you need to start a Lambda based project.
 
- * Yeoman has a heart of gold.
- * Yeoman is a person with feelings and opinions, but is very easy to work with.
- * Yeoman can be too opinionated at times but is easily convinced not to be.
- * Feel free to [learn more about Yeoman](http://yeoman.io/).
+## What is generated?
+- src folder with index.js and Lambda entry point function
+- Linter with opinionated linting rules
+- .gitignore file which includes files you will typically want to keep out of your git repository
+- .nvmrc which locks the Lambda to Node version 12.3.0. This can be changed if needed. To use the version included here install nvm and run `nvm use`
+- Pre-commit rules which (among other things) ensures AWS keys are not accidentally posted to a git repository (pre-commit will need to be installed for this to work)
+- The Jest testing suite to unit test code
+- A package.json file with all the necessarry npm installs and commands to get you started developing Lambda functions
+- A Readme with all the information you'll need to get started
+
+## Subgenerators
+
+### Service
+To generate a new service in the `src/services` folder of your generated project run
+```bash
+yo serverless-scaffolder:service
+```
+This will create a new service class and Jest test file to unit test the aforementioned class.
+
+### Util
+To generate a new set of utils in the `src/utils` folder of your generated project run
+```bash
+yo serverless-scaffolder:util
+```
+This will create a new util file and Jest test file to unit test the aforementioned functions.
+
+### Constants
+To generate a new constants file in the `src/constants` folder of your generated project run
+```bash
+yo serverless-scaffolder:constants
+```
+This will create a new constants file.
 
 ## License
 
 Apache-2.0 © [Blair Calderwood]()
-
-
-[npm-image]: https://badge.fury.io/js/generator-serverless-scaffolder.svg
-[npm-url]: https://npmjs.org/package/generator-serverless-scaffolder
-[travis-image]: https://travis-ci.com//generator-serverless-scaffolder.svg?branch=master
-[travis-url]: https://travis-ci.com//generator-serverless-scaffolder
-[daviddm-image]: https://david-dm.org//generator-serverless-scaffolder.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org//generator-serverless-scaffolder
-[coveralls-image]: https://coveralls.io/repos//generator-serverless-scaffolder/badge.svg
-[coveralls-url]: https://coveralls.io/r//generator-serverless-scaffolder
