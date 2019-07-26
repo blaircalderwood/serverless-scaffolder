@@ -5,9 +5,8 @@ const yosay = require('yosay');
 
 module.exports = class extends Generator {
   prompting() {
-    // Have Yeoman greet the user.
     this.log(
-      yosay(`Welcome to the best ${chalk.red('generator-serverless-scaffolder')} generator!`)
+      yosay(`Welcome to the ${chalk.red('generator-serverless-scaffolder')}!`)
     );
 
     const prompts = [

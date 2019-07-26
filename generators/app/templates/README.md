@@ -6,6 +6,7 @@ To invoke the generated Lambda locally run
 ```bash
 npm start
 ```
+This will pass in all data found in the `eventData.json` file. To alter the inputs to your Lambda alter this file.
 
 ## What is generated?
 - src folder with index.js and Lambda entry point function.
