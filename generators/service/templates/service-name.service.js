@@ -2,4 +2,4 @@ class <%= className %> {
   constructor(){}
 }
 
-export default <%= className %> ;
+module.exports = { <%= className %> };
