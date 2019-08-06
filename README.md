@@ -19,7 +19,7 @@ Answer the questions when prompted. The app will now be generated with everythin
 - src folder with index.js and Lambda entry point function
 - Linter with opinionated linting rules
 - .gitignore file which includes files you will typically want to keep out of your git repository
-- .nvmrc which locks the Lambda to Node version 12.3.0. This can be changed if needed. To use the version included here install nvm and run `nvm use`
+- .nvmrc which locks the Lambda to Node version 10.14.1. This can be changed if needed. To use the version included here install nvm and run `nvm use`
 - Pre-commit rules which (among other things) ensures AWS keys are not accidentally posted to a git repository (pre-commit will need to be installed for this to work)
 - The Jest testing suite to unit test code
 - A package.json file with all the necessarry npm installs and commands to get you started developing Lambda functions

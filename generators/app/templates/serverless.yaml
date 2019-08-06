@@ -1,0 +1,9 @@
+service: <%= projectName %>
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+
+functions:
+  handler:
+    handler: src/index.handler
