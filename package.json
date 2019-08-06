@@ -1,6 +1,6 @@
 {
   "name": "generator-serverless-scaffolder",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Generate Lambda functions deployable with Terraform IAC. Includes Webpack, Jest testing and an optional API Gateway module",
   "homepage": "",
   "author": {
@@ -11,9 +11,24 @@
   "files": [
     "generators"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blaircalderwood/serverless-scaffolder"
+  },
   "main": "generators/index.js",
   "keywords": [
-    "",
+    "serverless",
+    "AWS",
+    "Lambda",
+    "API Gateway",
+    "scaffolder",
+    "yeoman",
+    "generator",
+    "node",
+    "javascript",
+    "jest",
+    "webpack",
+    "code-coverage",
     "yeoman-generator"
   ],
   "devDependencies": {
