@@ -1,7 +1,7 @@
 'use strict';
 const Generator = require('yeoman-generator');
-
-const { toKebabCase, toCamelCase } = require('./strings.util.js');
+const camelCase = require('lodash/camelCase');
+const kebabCase = require('lodash/kebabCase');
 
 module.exports = class extends Generator {
   prompting() {
@@ -21,8 +21,8 @@ module.exports = class extends Generator {
 
   writing() {
     const { utilName } = this.props;
-    const folderName = toCamelCase(utilName);
-    const fileName = toKebabCase(utilName);
+    const folderName = camelCase(utilName);
+    const fileName = kebabCase(utilName);
 
     this.fs.copy(
       this.templatePath('./util-name.util.js'),

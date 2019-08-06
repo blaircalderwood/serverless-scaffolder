@@ -1,7 +1,9 @@
 'use strict';
 const Generator = require('yeoman-generator');
 
-const { toSentenceCase, toKebabCase, toCamelCase } = require('./strings.util');
+const camelCase = require('lodash/camelCase');
+const upperFirst = require('lodash/upperFirst');
+const kebabCase = require('lodash/kebabCase');
 
 module.exports = class extends Generator {
   prompting() {
@@ -23,10 +25,10 @@ module.exports = class extends Generator {
     const { serviceName } = this.props;
     const mappings = {
       serviceName,
-      className: toSentenceCase(serviceName),
+      className: upperFirst(serviceName),
     };
-    const folderName = toCamelCase(serviceName);
-    const fileName = toKebabCase(serviceName);
+    const folderName = camelCase(serviceName);
+    const fileName = kebabCase(serviceName);
 
     this.fs.copyTpl(
       this.templatePath('./service-name.service.js'),

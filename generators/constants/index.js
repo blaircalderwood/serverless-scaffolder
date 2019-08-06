@@ -1,7 +1,6 @@
 'use strict';
 const Generator = require('yeoman-generator');
-
-const { toKebabCase } = require('./strings.util');
+const kebabCase = require('lodash/kebabCase');
 
 module.exports = class extends Generator {
   prompting() {
@@ -21,7 +20,7 @@ module.exports = class extends Generator {
 
   writing() {
     const { constantsName } = this.props;
-    const fileName = toKebabCase(constantsName);
+    const fileName = kebabCase(constantsName);
 
     this.fs.copy(
       this.templatePath('./constants-name.js'),
