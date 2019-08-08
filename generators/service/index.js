@@ -6,23 +6,14 @@ const upperFirst = require('lodash/upperFirst');
 const kebabCase = require('lodash/kebabCase');
 
 module.exports = class extends Generator {
-  prompting() {
-    const prompts = [
-      {
-        type: 'input',
-        name: 'serviceName',
-        message: 'Service name:',
-      },
-    ];
+  constructor(args, opts) {
+    super(args, opts);
 
-    return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
-      this.props = props;
-    });
+    this.argument('serviceName', { required: true, type: String });
   }
 
   writing() {
-    const { serviceName } = this.props;
+    const { serviceName } = this.options;
     const mappings = {
       serviceName,
       className: upperFirst(serviceName),

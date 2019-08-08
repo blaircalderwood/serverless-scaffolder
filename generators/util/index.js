@@ -4,23 +4,14 @@ const camelCase = require('lodash/camelCase');
 const kebabCase = require('lodash/kebabCase');
 
 module.exports = class extends Generator {
-  prompting() {
-    const prompts = [
-      {
-        type: 'input',
-        name: 'utilName',
-        message: 'Util name:',
-      },
-    ];
+  constructor(args, opts) {
+    super(args, opts);
 
-    return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
-      this.props = props;
-    });
+    this.argument('utilName', { required: true, type: String });
   }
 
   writing() {
-    const { utilName } = this.props;
+    const { utilName } = this.options;
     const folderName = camelCase(utilName);
     const fileName = kebabCase(utilName);
 
