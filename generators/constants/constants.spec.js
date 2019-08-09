@@ -3,11 +3,10 @@ const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 
-beforeAll(async done => {
+beforeAll(() => {
   const serviceName = 'a-test-constants-file';
 
-  await helpers.run(path.join(__dirname, '.')).withArguments([serviceName]);
-  done();
+  return helpers.run(path.join(__dirname, '.')).withArguments([serviceName]);
 });
 
 describe('Constants subgenerator', () => {

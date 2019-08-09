@@ -3,11 +3,10 @@ const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 
-beforeAll(async done => {
+beforeAll(() => {
   const errorName = 'a-test-error';
 
-  await helpers.run(path.join(__dirname, '.')).withArguments([errorName]);
-  done();
+  return helpers.run(path.join(__dirname, '.')).withArguments([errorName]);
 });
 
 describe('Error subgenerator', () => {
