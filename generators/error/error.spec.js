@@ -3,13 +3,15 @@ const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 
-it('generates a error file', () => {
+beforeAll(async done => {
   const errorName = 'a-test-error';
 
-  return helpers
-    .run(path.join(__dirname, '.'))
-    .withArguments([errorName])
-    .then(() => {
-      assert.fileContent('src/errors/a-test-error.error.js', /ATestError/);
-    });
+  await helpers.run(path.join(__dirname, '.')).withArguments([errorName]);
+  done();
+});
+
+describe('Error subgenerator', () => {
+  it('generates an Error class file in the src/errors with the correct class name', () => {
+    assert.fileContent('src/errors/a-test-error.error.js', /ATestError/);
+  });
 });
