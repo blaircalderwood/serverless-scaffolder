@@ -1,5 +1,6 @@
 'use strict';
 const Generator = require('yeoman-generator');
+const camelCase = require('lodash/camelCase');
 const upperFirst = require('lodash/upperFirst');
 const kebabCase = require('lodash/kebabCase');
 
@@ -30,8 +31,11 @@ module.exports = class extends Generator {
     const { errorName } = this.options;
 
     const fileName = kebabCase(errorName);
+    const folderName = camelCase(errorName);
+    const className = upperFirst(folderName);
+
     const mappings = {
-      className: upperFirst(errorName),
+      className,
       errorMessage,
     };
 

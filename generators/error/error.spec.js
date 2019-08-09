@@ -10,6 +10,6 @@ it('generates a error file', () => {
     .run(path.join(__dirname, '.'))
     .withArguments([errorName])
     .then(() => {
-      assert.file('src/errors/a-test-error.error.js');
+      assert.fileContent('src/errors/a-test-error.error.js', /ATestError/);
     });
 });

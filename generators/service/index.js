@@ -13,12 +13,14 @@ module.exports = class extends Generator {
 
   writing() {
     const { serviceName } = this.options;
-    const mappings = {
-      serviceName,
-      className: upperFirst(serviceName),
-    };
     const folderName = camelCase(serviceName);
     const fileName = kebabCase(serviceName);
+    const className = upperFirst(folderName);
+
+    const mappings = {
+      serviceName,
+      className,
+    };
 
     this.fs.copyTpl(
       this.templatePath('./service-name.service.js'),
