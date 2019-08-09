@@ -1,6 +1,5 @@
 'use strict';
 const Generator = require('yeoman-generator');
-
 const camelCase = require('lodash/camelCase');
 const upperFirst = require('lodash/upperFirst');
 const kebabCase = require('lodash/kebabCase');
