@@ -3,13 +3,13 @@ const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 
-it('generates a constants file', () => {
-  const constantsName = 'a-test-constants-file';
+it('generates a error file', () => {
+  const errorName = 'a-test-error';
 
   return helpers
     .run(path.join(__dirname, '.'))
-    .withArguments([constantsName])
+    .withArguments([errorName])
     .then(() => {
-      assert.file('src/constants/a-test-constants-file.js');
+      assert.file('src/errors/a-test-error.error.js');
     });
 });
