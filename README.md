@@ -62,6 +62,16 @@ yo serverless-scaffolder:constants
 
 This will create a new constants file.
 
+### Errors
+
+To generate a new error type file in the `src/errors` folder of your generated project run
+
+```bash
+yo serverless-scaffolder:error
+```
+
+This will create a new error class which can then be imported and thrown in any project JavaScript file.
+
 ## License
 
 Apache-2.0 © [Blair Calderwood](https://github.com/blaircalderwood)
