@@ -26,21 +26,12 @@ module.exports = class extends Generator {
         message: "Author email:"
       },
       {
-<<<<<<< HEAD
         type: "number",
         name: "codeCoverage",
         message:
           "What is the minimum acceptable % of code coverage in your project?",
         default: "80"
       }
-=======
-        type: 'number',
-        name: 'codeCoverage',
-        message:
-          'What is the minimum acceptable % of code coverage in your project?',
-        default: '80',
-      },
->>>>>>> master
     ];
 
     return this.prompt(prompts).then(props => {
@@ -60,24 +51,14 @@ module.exports = class extends Generator {
 
     this.destinationRoot(this.props.projectName);
     this.fs.copyTpl(
-<<<<<<< HEAD
       this.templatePath("./**/*"),
       this.destinationPath("./"),
-=======
-      this.templatePath('./**/*'),
-      this.destinationPath('./'),
->>>>>>> master
       mappings
     );
 
     this.fs.copyTpl(
-<<<<<<< HEAD
       this.templatePath("./**/.*"),
       this.destinationPath("./"),
-=======
-      this.templatePath('./**/.*'),
-      this.destinationPath('./'),
->>>>>>> master
       mappings
     );
   }
