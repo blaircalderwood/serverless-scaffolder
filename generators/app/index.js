@@ -1,37 +1,37 @@
-"use strict";
-const Generator = require("yeoman-generator");
-const chalk = require("chalk");
-const yosay = require("yosay");
+'use strict';
+const Generator = require('yeoman-generator');
+const chalk = require('chalk');
+const yosay = require('yosay');
 
 module.exports = class extends Generator {
   prompting() {
     this.log(
-      yosay(`Welcome to the ${chalk.red("generator-serverless-scaffolder")}!`)
+      yosay(`Welcome to the ${chalk.red('generator-serverless-scaffolder')}!`)
     );
 
     const prompts = [
       {
-        type: "input",
-        name: "projectName",
-        message: "Lambda name:"
+        type: 'input',
+        name: 'projectName',
+        message: 'Lambda name:',
       },
       {
-        type: "input",
-        name: "authorName",
-        message: "Author name:"
+        type: 'input',
+        name: 'authorName',
+        message: 'Author name:',
       },
       {
-        type: "input",
-        name: "authorEmail",
-        message: "Author email:"
+        type: 'input',
+        name: 'authorEmail',
+        message: 'Author email:',
       },
       {
-        type: "number",
-        name: "codeCoverage",
+        type: 'number',
+        name: 'codeCoverage',
         message:
-          "What is the minimum acceptable % of code coverage in your project?",
-        default: "80"
-      }
+          'What is the minimum acceptable % of code coverage in your project?',
+        default: '80',
+      },
     ];
 
     return this.prompt(prompts).then(props => {
@@ -45,20 +45,20 @@ module.exports = class extends Generator {
       projectName: this.props.projectName,
       authorName: this.props.authorName,
       authorEmail: this.props.authorEmail,
-      authorUrl: "",
-      codeCoverage: this.props.codeCoverage
+      authorUrl: '',
+      codeCoverage: this.props.codeCoverage,
     };
 
     this.destinationRoot(this.props.projectName);
     this.fs.copyTpl(
-      this.templatePath("./**/*"),
-      this.destinationPath("./"),
+      this.templatePath('./**/*'),
+      this.destinationPath('./'),
       mappings
     );
 
     this.fs.copyTpl(
-      this.templatePath("./**/.*"),
-      this.destinationPath("./"),
+      this.templatePath('./**/.*'),
+      this.destinationPath('./'),
       mappings
     );
   }

@@ -1,40 +1,40 @@
-"use strict";
-const Generator = require("yeoman-generator");
-const kebabCase = require("lodash/kebabCase");
+'use strict';
+const Generator = require('yeoman-generator');
+const kebabCase = require('lodash/kebabCase');
 
 module.exports = class extends Generator {
   prompting() {
     const prompts = [
       {
-        type: "input",
-        name: "projectName",
-        message: "Lambda name:"
+        type: 'input',
+        name: 'projectName',
+        message: 'Lambda name:',
       },
       {
-        type: "input",
-        name: "awsRegion",
-        message: "AWS Region:"
+        type: 'input',
+        name: 'awsRegion',
+        message: 'AWS Region:',
       },
       {
-        type: "input",
-        name: "awsAccountNumber",
-        message: "AWS Account Number:"
+        type: 'input',
+        name: 'awsAccountNumber',
+        message: 'AWS Account Number:',
       },
       {
-        type: "input",
-        name: "awsLambdaSg",
-        message: "AWS Lambda Security Group:"
+        type: 'input',
+        name: 'awsLambdaSg',
+        message: 'AWS Lambda Security Group:',
       },
       {
-        type: "input",
-        name: "awsLambdaSubnet1",
-        message: "AWS Lambda Subnet 1:"
+        type: 'input',
+        name: 'awsLambdaSubnet1',
+        message: 'AWS Lambda Subnet 1:',
       },
       {
-        type: "input",
-        name: "awsLambdaSubnet2",
-        message: "AWS Lambda Subnet 2:"
-      }
+        type: 'input',
+        name: 'awsLambdaSubnet2',
+        message: 'AWS Lambda Subnet 2:',
+      },
     ];
 
     return this.prompt(prompts).then(props => {
@@ -44,7 +44,7 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    const environments = ["dev", "test"];
+    const environments = ['dev', 'test'];
 
     const mappings = {
       projectNameKebabCase: kebabCase(this.props.projectName),
@@ -53,20 +53,20 @@ module.exports = class extends Generator {
       awsAccountNumber: this.props.awsAccountNumber,
       awsLambdaSg: this.props.awsLambdaSg,
       awsLambdaSubnet1: this.props.awsLambdaSubnet1,
-      awsLambdaSubnet2: this.props.awsLambdaSubnet2
+      awsLambdaSubnet2: this.props.awsLambdaSubnet2,
     };
 
-    this.destinationRoot("iac");
+    this.destinationRoot('iac');
     environments.forEach(environment => {
       this.fs.copyTpl(
-        this.templatePath("./environment/"),
+        this.templatePath('./environment/'),
         this.destinationPath(`./lambda/${environment}/`),
         { ...mappings, environment }
       );
     });
 
     this.fs.copyTpl(
-      this.templatePath("./terraform-aws-lambda/"),
+      this.templatePath('./terraform-aws-lambda/'),
       this.destinationPath(`./modules/terraform-aws-lambda/`),
       mappings
     );
