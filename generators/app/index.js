@@ -28,7 +28,8 @@ module.exports = class extends Generator {
       {
         type: 'number',
         name: 'codeCoverage',
-        message: 'What is the minimum acceptable % of code coverage in your project?',
+        message:
+          'What is the minimum acceptable % of code coverage in your project?',
         default: '80',
       },
     ];
@@ -40,7 +41,7 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    const mappings = { 
+    const mappings = {
       projectName: this.props.projectName,
       authorName: this.props.authorName,
       authorEmail: this.props.authorEmail,
@@ -52,13 +53,13 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('./**/*'),
       this.destinationPath('./'),
-      mappings,
+      mappings
     );
 
     this.fs.copyTpl(
       this.templatePath('./**/.*'),
       this.destinationPath('./'),
-      mappings,
+      mappings
     );
   }
 

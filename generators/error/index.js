@@ -1,16 +1,18 @@
 'use strict';
 const Generator = require('yeoman-generator');
+const camelCase = require('lodash/camelCase');
 const upperFirst = require('lodash/upperFirst');
 const kebabCase = require('lodash/kebabCase');
 
 module.exports = class extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
+
+    this.argument('errorName', { required: true, type: String });
+  }
+
   prompting() {
     const prompts = [
-      {
-        type: 'input',
-        name: 'errorName',
-        message: 'Error name:',
-      },
       {
         type: 'input',
         name: 'errorMessage',
@@ -25,10 +27,15 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    const { errorName, errorMessage } = this.props;
+    const { errorMessage } = this.props;
+    const { errorName } = this.options;
+
     const fileName = kebabCase(errorName);
+    const folderName = camelCase(errorName);
+    const className = upperFirst(folderName);
+
     const mappings = {
-      className: upperFirst(errorName),
+      className,
       errorMessage,
     };
 

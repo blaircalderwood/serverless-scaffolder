@@ -1,14 +1,19 @@
 # Serverless Scaffolder
+
 Welcome to your new scaffolded Lambda serverless project.
 
 ## Running the Lambda locally
+
 To invoke the generated Lambda locally run
+
 ```bash
 npm start
 ```
+
 This will pass in all data found in the `eventData.json` file. To alter the inputs to your Lambda alter this file.
 
 ## What is generated?
+
 - src folder with index.js and Lambda entry point function.
 - Linter with opinionated linting rules.
 - .gitignore file which includes files you will typically want to keep out of your git repository.
@@ -21,22 +26,31 @@ This will pass in all data found in the `eventData.json` file. To alter the inpu
 ## Subgenerators
 
 ### Service
+
 To generate a new service in the `src/services` folder of your generated project run
+
 ```bash
 yo serverless-scaffolder:service
 ```
+
 This will create a new service class and Jest test file to unit test the aforementioned class.
 
 ### Util
+
 To generate a new set of utils in the `src/utils` folder of your generated project run
+
 ```bash
 yo serverless-scaffolder:util
 ```
+
 This will create a new util file and Jest test file to unit test the aforementioned functions.
 
 ### Constants
+
 To generate a new constants file in the `src/constants` folder of your generated project run
+
 ```bash
 yo serverless-scaffolder:constants
 ```
+
 This will create a new constants file.

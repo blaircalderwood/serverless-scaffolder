@@ -10,7 +10,10 @@
     "pack-prod": "webpack --mode production",
     "pack-dev": "webpack --mode development"
   },
-  "author": "",
+  "author": {
+    "name": "<%= authorName %>",
+    "email": "<%= authorEmail %>"
+  },
   "license": "ISC",
   "devDependencies": {
     "jest": "^24.8.0",
