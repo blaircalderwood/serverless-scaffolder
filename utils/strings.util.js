@@ -1,9 +1,17 @@
+const camelCase = require('lodash/camelCase');
+const upperFirst = require('lodash/upperFirst');
+const kebabCase = require('lodash/kebabCase');
+
 const toSentenceCase = (str) => {
-  return str.charAt(0).toUpperCase() + str.slice(1)
+  return upperFirst(str);
 }
 
 const toKebabCase = (str) => {
-  return str.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
+  return kebabCase(str);
 }
 
-module.exports = { toSentenceCase, toKebabCase };
+const toCamelCase = (str) => {
+  return camelCase(str);
+}
+
+module.exports = { toSentenceCase, toKebabCase, toCamelCase };

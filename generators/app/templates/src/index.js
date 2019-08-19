@@ -1,2 +1,3 @@
-exports.handler = async event => {
+module.exports.handler = async event => {
+  return event;
 };

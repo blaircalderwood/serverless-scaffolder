@@ -2,12 +2,31 @@
   "name": "<%= projectName %>",
   "version": "1.0.0",
   "description": "",
-  "main": ".eslintrc.js",
+  "main": "./src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "sls invoke local -f handler -p ./eventData.json",
+    "test": "jest",
+    "watch-tests": "jest --watch",
+    "pack-prod": "webpack --mode production",
+    "pack-dev": "webpack --mode development",
+    "pack": "npm-pack-zip",
+    "rename": "cross-env mv <%= projectName %>.zip <%= projectName %>-$BUILDVERSION.zip",
+    "version": "json -I -f package.json -e 'this.version=process.env.BUILDVERSION'"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
+    "jest": "^24.8.0",
+    "eslint": "^5.16.0",
+    "json": "^9.0.6",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.18.2",
+    "serverless": "^1.48.4",
+    "webpack": "^4.37.0",
+    "cross-env": "^5.2.0",
+    "npm-pack-zip": "^1.2.7",
+    "webpack-cli": "^3.3.6"
   }
 }

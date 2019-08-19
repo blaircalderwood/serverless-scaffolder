@@ -1,10 +1,10 @@
 common_tags = {
-  name = "<%= projectNameKebabCase %>" #"wilbur-hr-lex-proxy-service"
+  name = "<%= projectNameKebabCase %>"
 }
 
 name = "<%= projectNameKebabCase %>"
 
-environment = "dev"
+environment = "<%= environment %>"
 
 vpc_config = [{
   security_group_ids = ["<%= awsLambdaSg %>"]

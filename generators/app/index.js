@@ -5,13 +5,8 @@ const yosay = require("yosay");
 
 module.exports = class extends Generator {
   prompting() {
-    // Have Yeoman greet the user.
     this.log(
-      yosay(
-        `Welcome to the best ${chalk.red(
-          "generator-serverless-scaffolder"
-        )} generator!`
-      )
+      yosay(`Welcome to the ${chalk.red("generator-serverless-scaffolder")}!`)
     );
 
     const prompts = [
@@ -31,29 +26,11 @@ module.exports = class extends Generator {
         message: "Author email:"
       },
       {
-        type: "input",
-        name: "awsRegion",
-        message: "AWS Region:"
-      },
-      {
-        type: "input",
-        name: "awsAccountNumber",
-        message: "AWS Account Number:"
-      },
-      {
-        type: "input",
-        name: "awsLambdaSg",
-        message: "AWS Lambda Security Group:"
-      },
-      {
-        type: "input",
-        name: "awsLambdaSubnet1",
-        message: "AWS Lambda Subnet 1:"
-      },
-      {
-        type: "input",
-        name: "awsLambdaSubnet2",
-        message: "AWS Lambda Subnet 2:"
+        type: "number",
+        name: "codeCoverage",
+        message:
+          "What is the minimum acceptable % of code coverage in your project?",
+        default: "80"
       }
     ];
 
@@ -68,9 +45,8 @@ module.exports = class extends Generator {
       projectName: this.props.projectName,
       authorName: this.props.authorName,
       authorEmail: this.props.authorEmail,
-      awsRegion: this.props.awsRegion,
-      awsAccountNumber: this.props.awsAccountNumber,
-      authorUrl: ""
+      authorUrl: "",
+      codeCoverage: this.props.codeCoverage
     };
 
     this.destinationRoot(this.props.projectName);

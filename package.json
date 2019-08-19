@@ -1,6 +1,6 @@
 {
   "name": "generator-serverless-scaffolder",
-  "version": "0.0.0",
+  "version": "0.0.5",
   "description": "Generate Lambda functions deployable with Terraform IAC. Includes Webpack, Jest testing and an optional API Gateway module",
   "homepage": "",
   "author": {
@@ -11,23 +11,37 @@
   "files": [
     "generators"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blaircalderwood/serverless-scaffolder"
+  },
   "main": "generators/index.js",
   "keywords": [
-    "",
+    "serverless",
+    "AWS",
+    "Lambda",
+    "API Gateway",
+    "scaffolder",
+    "yeoman",
+    "generator",
+    "node",
+    "javascript",
+    "jest",
+    "webpack",
+    "code-coverage",
     "yeoman-generator"
   ],
   "devDependencies": {
-    "yeoman-test": "^1.7.0",
-    "yeoman-assert": "^3.1.0",
     "coveralls": "^3.0.5",
     "eslint": "^6.0.1",
-    "prettier": "^1.18.2",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-config-xo": "^0.26.0",
+    "eslint-plugin-prettier": "^3.1.0",
     "husky": "^3.0.1",
     "lint-staged": "^9.2.0",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "eslint-config-xo": "^0.26.0",
-    "jest": "^24.8.0"
+    "prettier": "^1.18.2",
+    "yeoman-assert": "^3.1.0",
+    "yeoman-test": "^1.7.0"
   },
   "engines": {
     "npm": ">= 4.0.0"
