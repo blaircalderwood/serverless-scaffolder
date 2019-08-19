@@ -88,7 +88,6 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
-<<<<<<< HEAD
 
 # Terraform
 **/.terraform/*
@@ -102,5 +101,3 @@ override.tf.json
 
 # MacOS
 .DS_Store
-=======
->>>>>>> master
