@@ -6,7 +6,11 @@ const yosay = require("yosay");
 module.exports = class extends Generator {
   prompting() {
     this.log(
+<<<<<<< HEAD
       yosay(`Welcome to the ${chalk.red("generator-serverless-scaffolder")}!`)
+=======
+      yosay(`Welcome to the ${chalk.red('generator-serverless-scaffolder')}!`)
+>>>>>>> master
     );
 
     const prompts = [
@@ -26,12 +30,21 @@ module.exports = class extends Generator {
         message: "Author email:"
       },
       {
+<<<<<<< HEAD
         type: "number",
         name: "codeCoverage",
         message:
           "What is the minimum acceptable % of code coverage in your project?",
         default: "80"
       }
+=======
+        type: 'number',
+        name: 'codeCoverage',
+        message:
+          'What is the minimum acceptable % of code coverage in your project?',
+        default: '80',
+      },
+>>>>>>> master
     ];
 
     return this.prompt(prompts).then(props => {
@@ -45,20 +58,35 @@ module.exports = class extends Generator {
       projectName: this.props.projectName,
       authorName: this.props.authorName,
       authorEmail: this.props.authorEmail,
+<<<<<<< HEAD
       authorUrl: "",
       codeCoverage: this.props.codeCoverage
+=======
+      authorUrl: '',
+      codeCoverage: this.props.codeCoverage,
+>>>>>>> master
     };
 
     this.destinationRoot(this.props.projectName);
     this.fs.copyTpl(
+<<<<<<< HEAD
       this.templatePath("./**/*"),
       this.destinationPath("./"),
+=======
+      this.templatePath('./**/*'),
+      this.destinationPath('./'),
+>>>>>>> master
       mappings
     );
 
     this.fs.copyTpl(
+<<<<<<< HEAD
       this.templatePath("./**/.*"),
       this.destinationPath("./"),
+=======
+      this.templatePath('./**/.*'),
+      this.destinationPath('./'),
+>>>>>>> master
       mappings
     );
   }
