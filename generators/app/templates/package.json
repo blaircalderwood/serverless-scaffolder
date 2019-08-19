@@ -13,7 +13,10 @@
     "rename": "cross-env mv <%= projectName %>.zip <%= projectName %>-$BUILDVERSION.zip",
     "version": "json -I -f package.json -e 'this.version=process.env.BUILDVERSION'"
   },
-  "author": "",
+  "author": {
+    "name": "<%= authorName %>",
+    "email": "<%= authorEmail %>"
+  },
   "license": "ISC",
   "devDependencies": {
     "jest": "^24.8.0",

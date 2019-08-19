@@ -3,23 +3,14 @@ const Generator = require('yeoman-generator');
 const kebabCase = require('lodash/kebabCase');
 
 module.exports = class extends Generator {
-  prompting() {
-    const prompts = [
-      {
-        type: 'input',
-        name: 'constantsName',
-        message: 'Constants name:',
-      },
-    ];
+  constructor(args, opts) {
+    super(args, opts);
 
-    return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
-      this.props = props;
-    });
+    this.argument('constantsName', { required: true, type: String });
   }
 
   writing() {
-    const { constantsName } = this.props;
+    const { constantsName } = this.options;
     const fileName = kebabCase(constantsName);
 
     this.fs.copy(
