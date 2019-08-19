@@ -8,14 +8,10 @@
     "test": "jest",
     "watch-tests": "jest --watch",
     "pack-prod": "webpack --mode production",
-<<<<<<< HEAD
     "pack-dev": "webpack --mode development",
     "pack": "npm-pack-zip",
     "rename": "cross-env mv <%= projectName %>.zip <%= projectName %>-$BUILDVERSION.zip",
     "version": "json -I -f package.json -e 'this.version=process.env.BUILDVERSION'"
-=======
-    "pack-dev": "webpack --mode development"
->>>>>>> master
   },
   "author": {
     "name": "<%= authorName %>",
@@ -32,11 +28,8 @@
     "prettier": "^1.18.2",
     "serverless": "^1.48.4",
     "webpack": "^4.37.0",
-<<<<<<< HEAD
     "cross-env": "^5.2.0",
     "npm-pack-zip": "^1.2.7",
-=======
->>>>>>> master
     "webpack-cli": "^3.3.6"
   }
 }
