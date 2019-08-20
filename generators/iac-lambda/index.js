@@ -46,14 +46,22 @@ module.exports = class extends Generator {
   writing() {
     const environments = ['dev', 'test'];
 
+    const {
+      projectName,
+      awsRegion,
+      awsAccountNumber,
+      awsLambdaSg,
+      awsLambdaSubnet1,
+      awsLambdaSubnet2,
+    } = this.props;
     const mappings = {
-      projectNameKebabCase: kebabCase(this.props.projectName),
-      projectName: this.props.projectName,
-      awsRegion: this.props.awsRegion,
-      awsAccountNumber: this.props.awsAccountNumber,
-      awsLambdaSg: this.props.awsLambdaSg,
-      awsLambdaSubnet1: this.props.awsLambdaSubnet1,
-      awsLambdaSubnet2: this.props.awsLambdaSubnet2,
+      projectNameKebabCase: kebabCase(projectName),
+      projectName,
+      awsRegion,
+      awsAccountNumber,
+      awsLambdaSg,
+      awsLambdaSubnet1,
+      awsLambdaSubnet2,
     };
 
     this.destinationRoot('iac');
