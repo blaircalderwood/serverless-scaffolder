@@ -35,12 +35,8 @@ module.exports = class extends Generator {
   writing() {
     const environments = ['dev', 'test'];
 
-    const mappings = {
-      pipelineName: this.props.pipelineName,
-      awsRegion: this.props.awsRegion,
-      awsAccountNumber: this.props.awsAccountNumber,
-      gitRepo: this.props.gitRepo,
-    };
+    const { pipelineName, awsRegion, awsAccountNumber, gitRepo } = this.props;
+    const mappings = { pipelineName, awsRegion, awsAccountNumber, gitRepo };
 
     this.destinationRoot('iac');
     environments.forEach(environment => {
