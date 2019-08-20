@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+aws ssm put-parameter --name "/${projectroot}/codebuild/${name}/buildnumber" --type "String" --value $BUILDNUMBER --overwrite
+echo "Updating /${projectroot}/codebuild/${name}/buildnumber"
+export BUILDVERSION=$MAJOR.$MINOR.$BUILDNUMBER

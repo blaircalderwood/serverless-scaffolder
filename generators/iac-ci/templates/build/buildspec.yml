@@ -1,0 +1,39 @@
+version: 0.2
+
+env:
+  variables:
+    MAJOR: "1"
+    MINOR: "2"
+    ART_BUCKET: s3://<%= pipelineName %>-<%= awsAccountNumber %>-artifacts/
+    TF_ART_BUCKET: s3://<%= pipelineName %>-<%= awsAccountNumber %>-artifacts/terraform/
+    PROJECT_NAME: "<%= pipelineName %>"
+  parameter-store:
+    BUILDNUMBER: /core/codebuild/<%= pipelineName %>/buildnumber
+
+phases:
+  install:
+    commands:
+      - apk add zip
+      - npm install
+  pre_build:
+    commands:
+      - echo "pre_build step"
+      - chmod +x ./scripts/buildno.sh 
+      - ./scripts/buildno.sh
+      - export BUILDVERSION=$MAJOR.$MINOR.$BUILDNUMBER
+      - echo "Running - $BUILDVERSION"
+  build:
+    commands:
+      - echo "build command"
+      - BUILDVERSION=$BUILDVERSION npm run version
+      - npm build
+      - npm run pack
+      - npm run rename
+      - aws s3 mv *.zip $ART_BUCKET
+      - echo "BUCKET $ART_BUCKET"
+      - echo "Store TF"
+      - zip -r "$PROJECT_NAME-TF-$BUILDVERSION.zip" iac
+      - aws s3 mv *.zip $TF_ART_BUCKET
+  post_build:
+    commands:
+      - if [ $CODEBUILD_BUILD_SUCCEEDING = 1 ]; then aws ssm put-parameter --name "/core/codebuild/"$PROJECT_NAME"/latest" --type "String" --value "$BUILDVERSION" --overwrite ; else echo Build failed; fi
