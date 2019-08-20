@@ -1,0 +1,25 @@
+version: 0.2
+
+env:
+  variables:
+    environment: "<%= environment %>"
+    CODEPATH: iac/lambda/<%= environment %>
+  parameter-store:
+    PACKAGE: /core/codebuild/<%= pipelineName %>/latest
+phases:
+  install:
+    commands:
+    - npm install
+  pre_build:
+    commands:
+      - echo "pre_build step"
+  build:
+    commands:
+      - echo "build command"
+      - cd $CODEPATH
+      - echo "deploy lambda"
+      - terraform init
+      - terraform apply -auto-approve
+  post_build:
+    commands:
+      - if [ $CODEBUILD_BUILD_SUCCEEDING = 1 ]; then aws ssm put-parameter --name "/core/codebuild/<%= pipelineName %>/deployed" --type "String" --value "$PACKAGE" --overwrite; else echo Build failed; fi
