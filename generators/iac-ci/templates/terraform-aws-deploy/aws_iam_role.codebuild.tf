@@ -1,5 +1,5 @@
 resource "aws_iam_role" "codebuild" {
-  name = "codebuild-${var.name}-service-role"
+  name = "${var.name}-sr"
   path = "/service-role/"
 
   assume_role_policy = <<HERE
