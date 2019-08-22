@@ -19,8 +19,8 @@ validate: init
 
 plan: validate
 	@echo "running terraform plan"
-	# cd $(COMPONENT) && \
-	# terraform plan -no-color
+	cd $(COMPONENT) && \
+	terraform plan -no-color
 
 apply: plan
 	@echo "running terraform apply"
