@@ -75,8 +75,14 @@ module.exports = class extends Generator {
     );
 
     this.fs.copyTpl(
-      this.templatePath('./scripts/Makefile'),
+      this.templatePath('./Makefile'),
       this.destinationPath(`./Makefile`),
+      mappings
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('./README.md'),
+      this.destinationPath(`./README.md`),
       mappings
     );
   }
