@@ -73,6 +73,18 @@ module.exports = class extends Generator {
       this.destinationPath(`../scripts/`),
       mappings
     );
+
+    this.fs.copyTpl(
+      this.templatePath('./Makefile'),
+      this.destinationPath(`./Makefile`),
+      mappings
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('./README.md'),
+      this.destinationPath(`./README.md`),
+      mappings
+    );
   }
 
   _checkLength(str) {
