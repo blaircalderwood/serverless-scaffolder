@@ -12,10 +12,15 @@ init:
 	cd $(COMPONENT) && \
 	terraform init
 
+validate: init
+	@echo "running terraform validate"
+	cd $(COMPONENT) && \
+	terraform validate -no-color
+
 plan: validate
 	@echo "running terraform plan"
-	cd $(COMPONENT) && \
-	terraform plan -no-color
+	# cd $(COMPONENT) && \
+	# terraform plan -no-color
 
 apply: plan
 	@echo "running terraform apply"
