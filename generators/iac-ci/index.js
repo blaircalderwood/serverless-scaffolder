@@ -73,6 +73,40 @@ module.exports = class extends Generator {
       this.destinationPath(`../scripts/`),
       mappings
     );
+
+    this.fs.copyTpl(
+      this.templatePath('./Makefile'),
+      this.destinationPath(`./Makefile`),
+      mappings
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('./README.md'),
+      this.destinationPath(`./README.md`),
+      mappings
+    );
+  }
+
+  _checkLength(str) {
+    return str.length < 50
+      ? true
+      : 'Length limit of 50 characters exceeded. Please choose a shorter name.';
+  }
+
+  _isNumber(str) {
+    return isNaN(str) ? 'Not a valid number.' : true;
+  }
+
+  _isValidRegion(str) {
+    const regionRegex = /^[a-z][a-z]-[a-z]*-[0-9]{1}/;
+
+    return str.match(regionRegex) ? true : 'Not a valid AWS region.';
+  }
+
+  _isValidUrl(str) {
+    const regionRegex = /https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+
+    return str.match(regionRegex) ? true : 'Not a valid HTTPS URL.';
   }
 
   _checkLength(str) {
