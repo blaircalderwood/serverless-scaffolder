@@ -23,7 +23,7 @@ p:
 	terraform plan -refresh=true | landscape
 
 build: init
-	terraform apply -auto-approve
+	terraform apply -input=false -auto-approve
 
 check: init
 	terraform plan -detailed-exitcode
