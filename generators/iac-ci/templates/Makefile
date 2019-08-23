@@ -25,7 +25,7 @@ plan: validate
 apply: plan
 	@echo "running terraform apply"
 	cd $(COMPONENT) && \
-	terraform apply -no-color
+	terraform apply -no-color -input=false -auto-approve
 
 plan-destroy: validate
 	@echo "running terraform plan -destroy"
