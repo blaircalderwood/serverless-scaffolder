@@ -100,7 +100,7 @@ Apache-2.0 © [Blair Calderwood](https://github.com/blaircalderwood)
 
 | [![Blair Calderwood][blaircalderwood_avatar]][blaircalderwood_homepage]<br/>[Blair Calderwood][blaircalderwood_homepage] |
 | [![Matt Childs][mattchilds1_avatar]][mattchilds1_homepage]<br/>[Matt Childs][mattchilds1_homepage] | [![James Woolfenden][jameswoolfenden_avatar]][jameswoolfenden_homepage]<br/>[James Woolfenden][jameswoolfenden_homepage] |
-|---|---|
+|---|---|---|
 
 [blaircalderwood_homepage]: https://github.com/blaircalderwood
 [blaircalderwood_avatar]: https://github.com/blaircalderwood.png?size=150
