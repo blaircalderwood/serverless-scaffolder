@@ -95,3 +95,16 @@ All code will be generated in `iac/lambda`
 ## License
 
 Apache-2.0 © [Blair Calderwood](https://github.com/blaircalderwood)
+
+### Contributors
+
+| [![Blair Calderwood][blaircalderwood_avatar]][blaircalderwood_homepage]<br/>[Blair Calderwood][blaircalderwood_homepage] |
+| [![Matt Childs][mattchilds1_avatar]][mattchilds1_homepage]<br/>[Matt Childs][mattchilds1_homepage] | [![James Woolfenden][jameswoolfenden_avatar]][jameswoolfenden_homepage]<br/>[James Woolfenden][jameswoolfenden_homepage] |
+|---|---|
+
+[blaircalderwood_homepage]: https://github.com/blaircalderwood
+[blaircalderwood_avatar]: https://github.com/blaircalderwood.png?size=150
+[mattchilds1_homepage]: https://github.com/mattchilds1
+[mattchilds1_avatar]: https://github.com/mattchilds1.png?size=150
+[jameswoolfenden_homepage]: https://github.com/jameswoolfenden
+[jameswoolfenden_avatar]: https://github.com/jameswoolfenden.png?size=150
