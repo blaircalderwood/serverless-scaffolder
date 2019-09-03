@@ -48,6 +48,10 @@ module.exports = class extends Generator {
       },
     ];
 
+    if (this.option('with-iac')) {
+      this.composeWith(require.resolve('../iac'));
+    }
+
     return this.prompt(prompts).then(props => {
       // To access props later use this.props.someAnswer;
       this.props = props;
