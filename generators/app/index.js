@@ -19,11 +19,13 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'authorName',
         message: 'Author name:',
+        default: this.user.git.name,
       },
       {
         type: 'input',
         name: 'authorEmail',
         message: 'Author email:',
+        default: this.user.git.email,
       },
       {
         type: 'number',
