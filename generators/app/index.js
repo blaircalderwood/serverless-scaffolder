@@ -81,6 +81,7 @@ module.exports = class extends Generator {
     this.config.set({
       awsRegion: this.props.awsRegion,
       awsAccountNumber: this.props.awsAccountNumber,
+      projectName: this.props.projectName,
     });
   }
 

@@ -7,11 +7,6 @@ module.exports = class extends Generator {
     const prompts = [
       {
         type: 'input',
-        name: 'projectName',
-        message: 'Lambda name:',
-      },
-      {
-        type: 'input',
         name: 'awsLambdaSg',
         message: 'AWS Lambda Security Group:',
       },
@@ -36,15 +31,11 @@ module.exports = class extends Generator {
   writing() {
     const environments = ['dev', 'test'];
 
-    const {
-      projectName,
-      awsLambdaSg,
-      awsLambdaSubnet1,
-      awsLambdaSubnet2,
-    } = this.props;
+    const { awsLambdaSg, awsLambdaSubnet1, awsLambdaSubnet2 } = this.props;
 
     const awsAccountNumber = this.config.get('awsAccountNumber');
     const awsRegion = this.config.get('awsRegion');
+    const projectName = this.config.get('projectName');
 
     const mappings = {
       projectNameKebabCase: kebabCase(projectName),
