@@ -32,6 +32,18 @@ module.exports = class extends Generator {
           'What is the minimum acceptable % of code coverage in your project?',
         default: '80',
       },
+      {
+        type: 'input',
+        name: 'awsRegion',
+        message: 'AWS Region:',
+        validate: this._isValidRegion,
+      },
+      {
+        type: 'input',
+        name: 'awsAccountNumber',
+        message: 'AWS Account Number:',
+        validate: this._isNumber,
+      },
     ];
 
     return this.prompt(prompts).then(props => {
@@ -47,6 +59,8 @@ module.exports = class extends Generator {
       authorEmail: this.props.authorEmail,
       authorUrl: '',
       codeCoverage: this.props.codeCoverage,
+      awsRegion: this.props.awsRegion,
+      awsAccountNumber: this.props.awsAccountNumber,
     };
 
     this.destinationRoot(this.props.projectName);
@@ -61,9 +75,24 @@ module.exports = class extends Generator {
       this.destinationPath('./'),
       mappings
     );
+
+    this.config.set({
+      awsRegion: this.props.awsRegion,
+      awsAccountNumber: this.props.awsAccountNumber,
+    });
   }
 
   install() {
     this.npmInstall();
+  }
+
+  _isNumber(str) {
+    return isNaN(str) ? 'Not a valid number.' : true;
+  }
+
+  _isValidRegion(str) {
+    const regionRegex = /^[a-z][a-z]-[a-z]*-[0-9]{1}/;
+
+    return str.match(regionRegex) ? true : 'Not a valid AWS region.';
   }
 };

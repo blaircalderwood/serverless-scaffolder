@@ -13,20 +13,8 @@ module.exports = class extends Generator {
       },
       {
         type: 'input',
-        name: 'awsRegion',
-        message: 'AWS Region:',
-        validate: this._isValidRegion,
-      },
-      {
-        type: 'input',
-        name: 'awsAccountNumber',
-        message: 'AWS Account Number:',
-        validate: this._isNumber,
-      },
-      {
-        type: 'input',
         name: 'gitRepo',
-        message: 'Git respository for build source (HTTPS):',
+        message: 'Git repository for build source (HTTPS):',
         validate: this._isValidUrl,
       },
     ];
@@ -39,7 +27,9 @@ module.exports = class extends Generator {
   writing() {
     const environments = ['dev', 'test'];
 
-    const { pipelineName, awsRegion, awsAccountNumber, gitRepo } = this.props;
+    const { pipelineName, gitRepo } = this.props;
+    const awsAccountNumber = this.config.get('awsAccountNumber');
+    const awsRegion = this.config.get('awsRegion');
     const mappings = { pipelineName, awsRegion, awsAccountNumber, gitRepo };
 
     this.destinationRoot('iac');
@@ -85,28 +75,7 @@ module.exports = class extends Generator {
       this.destinationPath(`./README.md`),
       mappings
     );
-  }
-
-  _checkLength(str) {
-    return str.length < 50
-      ? true
-      : 'Length limit of 50 characters exceeded. Please choose a shorter name.';
-  }
-
-  _isNumber(str) {
-    return isNaN(str) ? 'Not a valid number.' : true;
-  }
-
-  _isValidRegion(str) {
-    const regionRegex = /^[a-z][a-z]-[a-z]*-[0-9]{1}/;
-
-    return str.match(regionRegex) ? true : 'Not a valid AWS region.';
-  }
-
-  _isValidUrl(str) {
-    const regionRegex = /https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
-
-    return str.match(regionRegex) ? true : 'Not a valid HTTPS URL.';
+    this.destinationRoot('../');
   }
 
   _checkLength(str) {

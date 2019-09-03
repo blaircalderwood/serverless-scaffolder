@@ -12,16 +12,6 @@ module.exports = class extends Generator {
       },
       {
         type: 'input',
-        name: 'awsRegion',
-        message: 'AWS Region:',
-      },
-      {
-        type: 'input',
-        name: 'awsAccountNumber',
-        message: 'AWS Account Number:',
-      },
-      {
-        type: 'input',
         name: 'awsLambdaSg',
         message: 'AWS Lambda Security Group:',
       },
@@ -48,12 +38,14 @@ module.exports = class extends Generator {
 
     const {
       projectName,
-      awsRegion,
-      awsAccountNumber,
       awsLambdaSg,
       awsLambdaSubnet1,
       awsLambdaSubnet2,
     } = this.props;
+
+    const awsAccountNumber = this.config.get('awsAccountNumber');
+    const awsRegion = this.config.get('awsRegion');
+
     const mappings = {
       projectNameKebabCase: kebabCase(projectName),
       projectName,
@@ -78,5 +70,6 @@ module.exports = class extends Generator {
       this.destinationPath(`./modules/terraform-aws-lambda/`),
       mappings
     );
+    this.destinationRoot('../');
   }
 };
