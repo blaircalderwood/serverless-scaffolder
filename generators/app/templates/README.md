@@ -54,3 +54,31 @@ yo serverless-scaffolder:constants
 ```
 
 This will create a new constants file.
+
+### Infrastructure As Code
+
+To generate all Terraform associated with standing up CodeBuild/CodePipeline and Lambda for a dev/test environment the following should be run from the root directory
+
+```bash
+yo serverless-scaffolder:iac
+```
+
+This will create all of the associated IAC in the `iac/` folder. If only the CI or the Lambda IAC is needed please run one of the subcommands found below.
+
+#### Infrastructure As Code - CI (iac-ci)
+
+To generate all associated Terraform to standup CodeBuild/CodePipeline for a dev/test environment located in `iac/`. This should be run from the root folder of your generated project.
+
+```bash
+yo serverless-scaffolder:iac-ci
+```
+
+All code will be generated in `iac/`.
+
+#### Infrastructure As Code - Lambda (iac-lambda)
+
+To generate all associated Terraform to standup lambda infrastructure for a dev/test environment. This should be run from the root folder of your generated project.
+
+```bash
+yo serverless-scaffolder:iac-lambda
+```
