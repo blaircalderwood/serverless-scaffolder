@@ -3,37 +3,21 @@ const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 
+const PromptGenerator = require('../../prompt-generator');
+
 module.exports = class extends Generator {
   prompting() {
     this.log(
       yosay(`Welcome to the ${chalk.red('generator-serverless-scaffolder')}!`)
     );
 
+    const promptGenerator = new PromptGenerator(this);
+
     const prompts = [
-      {
-        type: 'input',
-        name: 'projectName',
-        message: 'Lambda name:',
-      },
-      {
-        type: 'input',
-        name: 'authorName',
-        message: 'Author name:',
-        default: this.user.git.name,
-      },
-      {
-        type: 'input',
-        name: 'authorEmail',
-        message: 'Author email:',
-        default: this.user.git.email,
-      },
-      {
-        type: 'number',
-        name: 'codeCoverage',
-        message:
-          'What is the minimum acceptable % of code coverage in your project?',
-        default: '80',
-      },
+      promptGenerator.projectName,
+      promptGenerator.authorName,
+      promptGenerator.authorEmail,
+      promptGenerator.codeCoverage,
     ];
 
     this.option('iac');
@@ -78,15 +62,5 @@ module.exports = class extends Generator {
 
   install() {
     this.npmInstall();
-  }
-
-  _isNumber(str) {
-    return isNaN(str) ? 'Not a valid number.' : true;
-  }
-
-  _isValidRegion(str) {
-    const regionRegex = /^[a-z][a-z]-[a-z]*-[0-9]{1}/;
-
-    return str.match(regionRegex) ? true : 'Not a valid AWS region.';
   }
 };

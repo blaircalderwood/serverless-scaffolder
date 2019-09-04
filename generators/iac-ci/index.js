@@ -1,39 +1,20 @@
 'use strict';
 const Generator = require('yeoman-generator');
 
+const PromptGenerator = require('../../prompt-generator');
+
 module.exports = class extends Generator {
   prompting() {
-    const prompts = [
-      {
-        type: 'input',
-        name: 'pipelineName',
-        message: 'Pipeline name:',
-        validate: this._checkLength,
-      },
-      {
-        type: 'input',
-        name: 'gitRepo',
-        message: 'Git repository for build source (HTTPS):',
-        validate: this._isValidUrl,
-      },
-    ];
+    const promptGenerator = new PromptGenerator(this);
+
+    const prompts = [promptGenerator.pipelineName, promptGenerator.gitRepo];
 
     if (!this.config.get('awsAccountNumber')) {
-      prompts.push({
-        type: 'input',
-        name: 'awsAccountNumber',
-        message: 'AWS Account Number:',
-        validate: this._isNumber,
-      });
+      prompts.push(promptGenerator.awsAccountNumber);
     }
 
     if (!this.config.get('awsRegion')) {
-      prompts.push({
-        type: 'input',
-        name: 'awsRegion',
-        message: 'AWS Region:',
-        validate: this._isValidRegion,
-      });
+      prompts.push(promptGenerator.awsRegion);
     }
 
     return this.prompt(prompts).then(props => {
@@ -100,27 +81,5 @@ module.exports = class extends Generator {
       awsRegion,
       awsAccountNumber,
     });
-  }
-
-  _checkLength(str) {
-    return str.length < 50
-      ? true
-      : 'Length limit of 50 characters exceeded. Please choose a shorter name.';
-  }
-
-  _isNumber(str) {
-    return isNaN(str) ? 'Not a valid number.' : true;
-  }
-
-  _isValidRegion(str) {
-    const regionRegex = /^[a-z][a-z]-[a-z]*-[0-9]{1}/;
-
-    return str.match(regionRegex) ? true : 'Not a valid AWS region.';
-  }
-
-  _isValidUrl(str) {
-    const regionRegex = /https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
-
-    return str.match(regionRegex) ? true : 'Not a valid HTTPS URL.';
   }
 };

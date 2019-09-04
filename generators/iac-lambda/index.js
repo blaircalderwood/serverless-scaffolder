@@ -2,46 +2,23 @@
 const Generator = require('yeoman-generator');
 const kebabCase = require('lodash/kebabCase');
 
+const PromptGenerator = require('../../prompt-generator');
+
 module.exports = class extends Generator {
   prompting() {
-    const prompts = [
-      {
-        type: 'input',
-        name: 'awsLambdaSg',
-        message: 'AWS Lambda Security Group:',
-      },
-      {
-        type: 'input',
-        name: 'awsLambdaSubnet1',
-        message: 'AWS Lambda Subnet 1:',
-      },
-      {
-        type: 'input',
-        name: 'awsLambdaSubnet2',
-        message: 'AWS Lambda Subnet 2:',
-      },
-    ];
+    const promptGenerator = new PromptGenerator(this);
+
+    const prompts = [promptGenerator.securityGroup, promptGenerator.subnets];
 
     if (!this.config.get('awsAccountNumber')) {
-      prompts.push({
-        type: 'input',
-        name: 'awsAccountNumber',
-        message: 'AWS Account Number:',
-        validate: this._isNumber,
-      });
+      prompts.push(promptGenerator.awsAccountNumber);
     }
 
     if (!this.config.get('awsRegion')) {
-      prompts.push({
-        type: 'input',
-        name: 'awsRegion',
-        message: 'AWS Region:',
-        validate: this._isValidRegion,
-      });
+      prompts.push(promptGenerator.awsRegion);
     }
 
     return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
       this.props = props;
     });
   }
