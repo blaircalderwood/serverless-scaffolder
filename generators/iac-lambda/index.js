@@ -26,7 +26,7 @@ module.exports = class extends Generator {
   writing() {
     const environments = ['dev', 'test'];
 
-    const { awsLambdaSg, awsLambdaSubnet1, awsLambdaSubnet2 } = this.props;
+    const { awsLambdaSg, awsLambdaSubnets } = this.props;
 
     const awsAccountNumber = this.config.get('awsAccountNumber');
     const awsRegion = this.config.get('awsRegion');
@@ -38,8 +38,7 @@ module.exports = class extends Generator {
       awsRegion,
       awsAccountNumber,
       awsLambdaSg,
-      awsLambdaSubnet1,
-      awsLambdaSubnet2,
+      awsLambdaSubnets,
     };
 
     this.destinationRoot('iac');
