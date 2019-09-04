@@ -1,6 +1,5 @@
 'use strict';
 const Generator = require('yeoman-generator');
-const kebabCase = require('lodash/kebabCase');
 
 module.exports = class extends Generator {
   prompting() {
@@ -19,6 +18,24 @@ module.exports = class extends Generator {
       },
     ];
 
+    if (!this.config.get('awsAccountNumber')) {
+      prompts.push({
+        type: 'input',
+        name: 'awsAccountNumber',
+        message: 'AWS Account Number:',
+        validate: this._isNumber,
+      });
+    }
+
+    if (!this.config.get('awsRegion')) {
+      prompts.push({
+        type: 'input',
+        name: 'awsRegion',
+        message: 'AWS Region:',
+        validate: this._isValidRegion,
+      });
+    }
+
     return this.prompt(prompts).then(props => {
       this.props = props;
     });
@@ -28,8 +45,10 @@ module.exports = class extends Generator {
     const environments = ['dev', 'test'];
 
     const { pipelineName, gitRepo } = this.props;
-    const awsAccountNumber = this.config.get('awsAccountNumber');
-    const awsRegion = this.config.get('awsRegion');
+
+    const awsAccountNumber =
+      this.props.awsAccountNumber || this.config.get('awsAccountNumber');
+    const awsRegion = this.props.awsRegion || this.config.get('awsRegion');
     const mappings = { pipelineName, awsRegion, awsAccountNumber, gitRepo };
 
     this.destinationRoot('iac');
@@ -76,6 +95,11 @@ module.exports = class extends Generator {
       mappings
     );
     this.destinationRoot('../');
+
+    this.config.set({
+      awsRegion,
+      awsAccountNumber,
+    });
   }
 
   _checkLength(str) {

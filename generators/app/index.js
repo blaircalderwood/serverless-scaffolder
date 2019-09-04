@@ -34,39 +34,28 @@ module.exports = class extends Generator {
           'What is the minimum acceptable % of code coverage in your project?',
         default: '80',
       },
-      {
-        type: 'input',
-        name: 'awsRegion',
-        message: 'AWS Region:',
-        validate: this._isValidRegion,
-      },
-      {
-        type: 'input',
-        name: 'awsAccountNumber',
-        message: 'AWS Account Number:',
-        validate: this._isNumber,
-      },
     ];
 
-    if (this.option('with-iac')) {
+    this.option('iac');
+
+    if (this.options.iac) {
       this.composeWith(require.resolve('../iac'));
     }
 
     return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
       this.props = props;
     });
   }
 
   writing() {
+    const { projectName, authorName, authorEmail, codeCoverage } = this.props;
+
     const mappings = {
-      projectName: this.props.projectName,
-      authorName: this.props.authorName,
-      authorEmail: this.props.authorEmail,
+      projectName,
+      authorName,
+      authorEmail,
       authorUrl: '',
-      codeCoverage: this.props.codeCoverage,
-      awsRegion: this.props.awsRegion,
-      awsAccountNumber: this.props.awsAccountNumber,
+      codeCoverage,
     };
 
     this.destinationRoot(this.props.projectName);
@@ -83,9 +72,7 @@ module.exports = class extends Generator {
     );
 
     this.config.set({
-      awsRegion: this.props.awsRegion,
-      awsAccountNumber: this.props.awsAccountNumber,
-      projectName: this.props.projectName,
+      projectName,
     });
   }
 

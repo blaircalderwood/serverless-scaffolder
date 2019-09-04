@@ -17,10 +17,10 @@ Move into the directory you wish to create your app in (e.g. projects/) and run 
 yo serverless-scaffolder
 ```
 
-If you want to generate the project with full CodeBuild / CodePipeline and Lambda Terraform IAC then run with the `--with-iac` flag.
+If you want to generate the project with full CodeBuild / CodePipeline and Lambda Terraform IAC then run with the `--iac` flag.
 
 ```bash
-yo serverless-scaffolder --with-iac
+yo serverless-scaffolder --iac
 ```
 
 Answer the questions when prompted. The app will now be generated with everything you need to start a Lambda based project.

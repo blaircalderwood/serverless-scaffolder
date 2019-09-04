@@ -22,6 +22,24 @@ module.exports = class extends Generator {
       },
     ];
 
+    if (!this.config.get('awsAccountNumber')) {
+      prompts.push({
+        type: 'input',
+        name: 'awsAccountNumber',
+        message: 'AWS Account Number:',
+        validate: this._isNumber,
+      });
+    }
+
+    if (!this.config.get('awsRegion')) {
+      prompts.push({
+        type: 'input',
+        name: 'awsRegion',
+        message: 'AWS Region:',
+        validate: this._isValidRegion,
+      });
+    }
+
     return this.prompt(prompts).then(props => {
       // To access props later use this.props.someAnswer;
       this.props = props;
@@ -62,5 +80,7 @@ module.exports = class extends Generator {
       mappings
     );
     this.destinationRoot('../');
+
+    this.config.set({ awsAccountNumber, awsRegion });
   }
 };
