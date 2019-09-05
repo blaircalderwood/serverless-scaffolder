@@ -28,8 +28,9 @@ module.exports = class extends Generator {
 
     const { awsLambdaSg, awsLambdaSubnets } = this.props;
 
-    const awsAccountNumber = this.config.get('awsAccountNumber');
-    const awsRegion = this.config.get('awsRegion');
+    const awsAccountNumber =
+      this.props.awsAccountNumber || this.config.get('awsAccountNumber');
+    const awsRegion = this.props.awsRegion || this.config.get('awsRegion');
     const projectName = this.config.get('projectName');
 
     const mappings = {

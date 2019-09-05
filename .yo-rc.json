@@ -5,9 +5,5 @@
       "authorEmail": "blair.calderwood@slalom.com",
       "authorUrl": ""
     }
-  },
-  "generator-serverless-scaffolder": {
-    "awsRegion": "eu-west-1",
-    "awsAccountNumber": "11002233"
   }
 }
