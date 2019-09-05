@@ -7,21 +7,6 @@ module.exports = class extends Generator {
     const prompts = [
       {
         type: 'input',
-        name: 'projectName',
-        message: 'Lambda name:',
-      },
-      {
-        type: 'input',
-        name: 'awsRegion',
-        message: 'AWS Region:',
-      },
-      {
-        type: 'input',
-        name: 'awsAccountNumber',
-        message: 'AWS Account Number:',
-      },
-      {
-        type: 'input',
         name: 'awsLambdaSg',
         message: 'AWS Lambda Security Group:',
       },
@@ -37,6 +22,24 @@ module.exports = class extends Generator {
       },
     ];
 
+    if (!this.config.get('awsAccountNumber')) {
+      prompts.push({
+        type: 'input',
+        name: 'awsAccountNumber',
+        message: 'AWS Account Number:',
+        validate: this._isNumber,
+      });
+    }
+
+    if (!this.config.get('awsRegion')) {
+      prompts.push({
+        type: 'input',
+        name: 'awsRegion',
+        message: 'AWS Region:',
+        validate: this._isValidRegion,
+      });
+    }
+
     return this.prompt(prompts).then(props => {
       // To access props later use this.props.someAnswer;
       this.props = props;
@@ -46,14 +49,12 @@ module.exports = class extends Generator {
   writing() {
     const environments = ['dev', 'test'];
 
-    const {
-      projectName,
-      awsRegion,
-      awsAccountNumber,
-      awsLambdaSg,
-      awsLambdaSubnet1,
-      awsLambdaSubnet2,
-    } = this.props;
+    const { awsLambdaSg, awsLambdaSubnet1, awsLambdaSubnet2 } = this.props;
+
+    const awsAccountNumber = this.config.get('awsAccountNumber');
+    const awsRegion = this.config.get('awsRegion');
+    const projectName = this.config.get('projectName');
+
     const mappings = {
       projectNameKebabCase: kebabCase(projectName),
       projectName,
@@ -78,5 +79,8 @@ module.exports = class extends Generator {
       this.destinationPath(`./modules/terraform-aws-lambda/`),
       mappings
     );
+    this.destinationRoot('../');
+
+    this.config.set({ awsAccountNumber, awsRegion });
   }
 };

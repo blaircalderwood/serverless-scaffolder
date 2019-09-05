@@ -1,6 +1,5 @@
 'use strict';
 const Generator = require('yeoman-generator');
-const kebabCase = require('lodash/kebabCase');
 
 module.exports = class extends Generator {
   prompting() {
@@ -13,23 +12,29 @@ module.exports = class extends Generator {
       },
       {
         type: 'input',
-        name: 'awsRegion',
-        message: 'AWS Region:',
-        validate: this._isValidRegion,
+        name: 'gitRepo',
+        message: 'Git repository for build source (HTTPS):',
+        validate: this._isValidUrl,
       },
-      {
+    ];
+
+    if (!this.config.get('awsAccountNumber')) {
+      prompts.push({
         type: 'input',
         name: 'awsAccountNumber',
         message: 'AWS Account Number:',
         validate: this._isNumber,
-      },
-      {
+      });
+    }
+
+    if (!this.config.get('awsRegion')) {
+      prompts.push({
         type: 'input',
-        name: 'gitRepo',
-        message: 'Git respository for build source (HTTPS):',
-        validate: this._isValidUrl,
-      },
-    ];
+        name: 'awsRegion',
+        message: 'AWS Region:',
+        validate: this._isValidRegion,
+      });
+    }
 
     return this.prompt(prompts).then(props => {
       this.props = props;
@@ -39,7 +44,11 @@ module.exports = class extends Generator {
   writing() {
     const environments = ['dev', 'test'];
 
-    const { pipelineName, awsRegion, awsAccountNumber, gitRepo } = this.props;
+    const { pipelineName, gitRepo } = this.props;
+
+    const awsAccountNumber =
+      this.props.awsAccountNumber || this.config.get('awsAccountNumber');
+    const awsRegion = this.props.awsRegion || this.config.get('awsRegion');
     const mappings = { pipelineName, awsRegion, awsAccountNumber, gitRepo };
 
     this.destinationRoot('iac');
@@ -85,28 +94,12 @@ module.exports = class extends Generator {
       this.destinationPath(`./README.md`),
       mappings
     );
-  }
+    this.destinationRoot('../');
 
-  _checkLength(str) {
-    return str.length < 50
-      ? true
-      : 'Length limit of 50 characters exceeded. Please choose a shorter name.';
-  }
-
-  _isNumber(str) {
-    return isNaN(str) ? 'Not a valid number.' : true;
-  }
-
-  _isValidRegion(str) {
-    const regionRegex = /^[a-z][a-z]-[a-z]*-[0-9]{1}/;
-
-    return str.match(regionRegex) ? true : 'Not a valid AWS region.';
-  }
-
-  _isValidUrl(str) {
-    const regionRegex = /https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
-
-    return str.match(regionRegex) ? true : 'Not a valid HTTPS URL.';
+    this.config.set({
+      awsRegion,
+      awsAccountNumber,
+    });
   }
 
   _checkLength(str) {
