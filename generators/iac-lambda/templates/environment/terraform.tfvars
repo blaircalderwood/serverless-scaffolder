@@ -6,10 +6,14 @@ name = "<%= projectNameKebabCase %>"
 
 environment = "<%= environment %>"
 
-vpc_config = [{
+vpc_config = [
+  <%if (awsLambdaSg) { %>
+  {
   security_group_ids = ["<%= awsLambdaSg %>"]
-  subnet_ids         = ["<%= awsLambdaSubnet1 %>", "<%= awsLambdaSubnet2 %>"]
-}]
+  subnet_ids         = ["<%= awsLambdaSubnets %>"]
+}
+<% } %>
+]
 
 artifact_bucket = "<%= projectNameKebabCase %>-<%= awsAccountNumber %>-artifacts"
 
