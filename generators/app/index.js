@@ -63,4 +63,14 @@ module.exports = class extends Generator {
   install() {
     this.npmInstall();
   }
+
+  _isNumber(str) {
+    return isNaN(str) ? 'Not a valid number.' : true;
+  }
+
+  _isValidRegion(str) {
+    const regionRegex = /^[a-z][a-z]-[a-z]*-[0-9]{1}/;
+
+    return str.match(regionRegex) ? true : 'Not a valid AWS region.';
+  }
 };
