@@ -2,20 +2,20 @@
 const Generator = require('yeoman-generator');
 const kebabCase = require('lodash/kebabCase');
 
-const PromptGenerator = require('../../prompt-generator');
+const PromptsService = require('../../prompts/prompts.service');
 
 module.exports = class extends Generator {
   prompting() {
-    const promptGenerator = new PromptGenerator(this);
+    const promptsService = new PromptsService(this);
 
-    const prompts = [promptGenerator.securityGroup, promptGenerator.subnets];
+    const prompts = [promptsService.securityGroup, promptsService.subnets];
 
     if (!this.config.get('awsAccountNumber')) {
-      prompts.push(promptGenerator.awsAccountNumber);
+      prompts.push(promptsService.awsAccountNumber);
     }
 
     if (!this.config.get('awsRegion')) {
-      prompts.push(promptGenerator.awsRegion);
+      prompts.push(promptsService.awsRegion);
     }
 
     return this.prompt(prompts).then(props => {

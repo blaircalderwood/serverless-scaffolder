@@ -3,7 +3,7 @@ const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 
-const PromptGenerator = require('../../prompt-generator');
+const PromptGenerator = require('../../prompts/prompts.service');
 
 module.exports = class extends Generator {
   prompting() {
@@ -11,13 +11,13 @@ module.exports = class extends Generator {
       yosay(`Welcome to the ${chalk.red('generator-serverless-scaffolder')}!`)
     );
 
-    const promptGenerator = new PromptGenerator(this);
+    const promptsService = new PromptGenerator(this);
 
     const prompts = [
-      promptGenerator.projectName,
-      promptGenerator.authorName,
-      promptGenerator.authorEmail,
-      promptGenerator.codeCoverage,
+      promptsService.projectName,
+      promptsService.authorName,
+      promptsService.authorEmail,
+      promptsService.codeCoverage,
     ];
 
     this.option('iac');
