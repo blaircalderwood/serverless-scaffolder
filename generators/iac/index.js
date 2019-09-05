@@ -1,11 +1,11 @@
 'use strict';
 const Generator = require('yeoman-generator');
 
-const PromptGenerator = require('../../prompts');
+const PromptsService = require('../../prompts/prompts.service');
 
 module.exports = class extends Generator {
   prompting() {
-    const promptsService = new PromptGenerator(this);
+    const promptsService = new PromptsService(this);
 
     const prompts = [];
 
