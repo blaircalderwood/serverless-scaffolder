@@ -31,6 +31,11 @@
     "code-coverage",
     "yeoman-generator"
   ],
+  "scripts": {
+    "pretest": "eslint .",
+    "prepush": "npm run test",
+    "test": "jest"
+  },
   "devDependencies": {
     "coveralls": "^3.0.6",
     "eslint": "^5.9.0",
@@ -83,11 +88,6 @@
     "plugins": [
       "prettier"
     ]
-  },
-  "scripts": {
-    "pretest": "eslint .",
-    "prepush": "npm run test",
-    "test": "jest"
   },
   "license": "Apache-2.0"
 }
