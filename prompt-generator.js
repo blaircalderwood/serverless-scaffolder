@@ -100,6 +100,14 @@ class PromptGenerator {
     };
   }
 
+  get pathPart() {
+    return {
+      type: 'input',
+      name: 'pathPart',
+      message: 'Path part for API Gateway (e.g. /chatbot)',
+    };
+  }
+
   checkLength(str) {
     return str.length < 50
       ? true
