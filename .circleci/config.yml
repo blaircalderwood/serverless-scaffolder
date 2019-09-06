@@ -56,4 +56,4 @@ workflows:
             - test
       - deploy:
           requires:
-            - hold
+            - confirm-npm-publish
