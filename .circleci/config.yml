@@ -10,17 +10,29 @@ jobs:
       - image: circleci/node:10.13.0
     steps:
       - checkout
-      - run: npm install
+      - run:
+          name: Install dependencies
+          command: npm install
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
   test:
     docker:
       - image: circleci/node:10.13.0
     steps:
-      - run: npm test
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run unit tests
+          command: npm test
   deploy:
     docker:
       - image: circleci/node:10.13.0
     steps:
-      - run: npm publish
+      - run:
+          name: Publish to NPM
+          command: npm publish
 
 workflows:
   version: 2
