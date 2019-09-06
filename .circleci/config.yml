@@ -36,6 +36,9 @@ jobs:
       - attach_workspace:
           at: ~/
       - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/.npmrc
+      - run:
           name: Publish to NPM
           command: npm publish
 
@@ -47,7 +50,7 @@ workflows:
       - test:
           requires:
             - build
-      - hold:
+      - confirm-npm-publish:
           type: approval
           requires:
             - test
