@@ -40,7 +40,7 @@ jobs:
           command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/.npmrc
       - run:
           name: Echo tag number
-          command: Publishing version $CIRCLE_TAG to NPM package
+          command: echo Publishing version $CIRCLE_TAG to NPM package
       - run:
           name: Set version to that in git tag
           command: npm version $CIRCLE_TAG
