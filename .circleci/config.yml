@@ -1,11 +1,49 @@
-version: 2.0
+version: 2
+
+# defaults: &defaults
+#   docker:
+#     - image: circleci/node:10.13.0
+
 jobs:
   build:
     docker:
       - image: circleci/node:10.13.0
     steps:
       - checkout
-      - run: echo "Running build"
-      - run: npm install
-      - run: npm test
-      - run: npm publish
+      - run:
+          name: Install dependencies
+          command: npm install
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  test:
+    docker:
+      - image: circleci/node:10.13.0
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run unit tests
+          command: npm test
+  deploy:
+    docker:
+      - image: circleci/node:10.13.0
+    steps:
+      - run:
+          name: Publish to NPM
+          command: npm publish
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - hold:
+          type: approval
+          requires:
+            - test
+      - deploy
