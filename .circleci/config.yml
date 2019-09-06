@@ -30,10 +30,10 @@ workflows:
     jobs:
       - build
       - test:
-        requires:
-          - build
+          requires:
+            - build
       - hold:
-        type: approval
-        requires:
-          - test
+          type: approval
+          requires:
+            - test
       - deploy
