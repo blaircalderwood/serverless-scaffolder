@@ -17,9 +17,23 @@ jobs:
     steps:
       - checkout
       - run: npm test
-  publish:
+  deploy:
     docker:
       - image: circleci/node:10.13.0
     steps:
       - checkout
       - run: npm publish
+
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - build
+      - test:
+        requires:
+          - build
+      - hold:
+        type: approval
+        requires:
+          - test
+      - deploy
