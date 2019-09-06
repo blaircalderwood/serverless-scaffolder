@@ -1,4 +1,4 @@
-class PromptGenerator {
+class PromptsService {
   constructor(generator) {
     this.generator = generator;
   }
@@ -44,7 +44,7 @@ class PromptGenerator {
       type: 'input',
       name: 'pipelineName',
       message: 'Pipeline name:',
-      validate: this.checkLength,
+      validate: this._checkLength,
     };
   }
 
@@ -53,7 +53,7 @@ class PromptGenerator {
       type: 'input',
       name: 'gitRepo',
       message: 'Git repository for build source (HTTPS):',
-      validate: this.isValidUrl,
+      validate: this._isValidUrl,
     };
   }
 
@@ -62,7 +62,7 @@ class PromptGenerator {
       type: 'input',
       name: 'awsAccountNumber',
       message: 'AWS Account Number:',
-      validate: this.isNumber,
+      validate: this._isNumber,
     };
   }
 
@@ -71,7 +71,7 @@ class PromptGenerator {
       type: 'input',
       name: 'awsRegion',
       message: 'AWS Region:',
-      validate: this.isValidRegion,
+      validate: this._isValidRegion,
     };
   }
 
@@ -114,21 +114,21 @@ class PromptGenerator {
       : 'Length limit of 50 characters exceeded. Please choose a shorter name.';
   }
 
-  isValidUrl(str) {
+  _isValidUrl(str) {
     const regionRegex = /https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
 
     return str.match(regionRegex) ? true : 'Not a valid HTTPS URL.';
   }
 
-  isNumber(str) {
+  _isNumber(str) {
     return isNaN(str) ? 'Not a valid number.' : true;
   }
 
-  isValidRegion(str) {
+  _isValidRegion(str) {
     const regionRegex = /^[a-z][a-z]-[a-z]*-[0-9]{1}/;
 
     return str.match(regionRegex) ? true : 'Not a valid AWS region.';
   }
 }
 
-module.exports = PromptGenerator;
+module.exports = PromptsService;

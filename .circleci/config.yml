@@ -13,10 +13,16 @@ jobs:
       - run:
           name: Install dependencies
           command: npm install
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - .
   test:
     docker:
       - image: circleci/node:10.13.0
     steps:
+      - attach_workspace:
+          at: ~/
       - run:
           name: Run unit tests
           command: npm test
@@ -27,6 +33,11 @@ jobs:
     docker:
       - image: circleci/node:10.13.0
     steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/.npmrc
       - run:
           name: Publish to NPM
           command: npm publish
@@ -39,10 +50,13 @@ workflows:
       - test:
           requires:
             - build
-      - hold:
+      - confirm-npm-publish:
           type: approval
           requires:
             - test
+          filters:
+            branches:
+              only: master
       - deploy:
           requires:
-            - hold
+            - confirm-npm-publish

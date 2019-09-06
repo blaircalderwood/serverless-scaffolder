@@ -10,7 +10,7 @@ beforeAll(() => {
 });
 
 describe('Util subgenerator', () => {
-  it('generates an util file in the src/utils/<utilName> folder with the correct util name', () => {
+  it('generates a util file in the src/utils/<utilName> folder with the correct util name', () => {
     assert.file('src/utils/aTestUtil/a-test-util.util.js');
   });
 
