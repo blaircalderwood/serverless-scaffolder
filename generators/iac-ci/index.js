@@ -1,20 +1,20 @@
 'use strict';
 const Generator = require('yeoman-generator');
 
-const PromptGenerator = require('../../prompt-generator');
+const PromptsService = require('../../prompts/prompts.service');
 
 module.exports = class extends Generator {
   prompting() {
-    const promptGenerator = new PromptGenerator(this);
+    const promptsService = new PromptsService(this);
 
-    const prompts = [promptGenerator.pipelineName, promptGenerator.gitRepo];
+    const prompts = [promptsService.pipelineName, promptsService.gitRepo];
 
     if (!this.config.get('awsAccountNumber')) {
-      prompts.push(promptGenerator.awsAccountNumber);
+      prompts.push(promptsService.awsAccountNumber);
     }
 
     if (!this.config.get('awsRegion')) {
-      prompts.push(promptGenerator.awsRegion);
+      prompts.push(promptsService.awsRegion);
     }
 
     return this.prompt(prompts).then(props => {
