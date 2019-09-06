@@ -13,11 +13,16 @@ jobs:
       - run:
           name: Install dependencies
           command: npm install
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - .
   test:
     docker:
       - image: circleci/node:10.13.0
     steps:
-      - checkout
+      - attach_workspace:
+          at: /tmp/workspace
       - run:
           name: Run unit tests
           command: npm test
@@ -28,7 +33,6 @@ jobs:
     docker:
       - image: circleci/node:10.13.0
     steps:
-      - checkout
       - run:
           name: Publish to NPM
           command: npm publish
