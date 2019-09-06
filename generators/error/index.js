@@ -4,7 +4,7 @@ const camelCase = require('lodash/camelCase');
 const upperFirst = require('lodash/upperFirst');
 const kebabCase = require('lodash/kebabCase');
 
-const PromptGenerator = require('../../prompt-generator');
+const PromptGenerator = require('../../prompts/prompts.service');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -14,9 +14,9 @@ module.exports = class extends Generator {
   }
 
   prompting() {
-    const promptGenerator = new PromptGenerator();
+    const promptsService = new PromptGenerator();
 
-    const prompts = [promptGenerator.errorMessage];
+    const prompts = [promptsService.errorMessage];
 
     return this.prompt(prompts).then(props => {
       // To access props later use this.props.someAnswer;
