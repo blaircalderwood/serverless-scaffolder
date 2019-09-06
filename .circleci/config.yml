@@ -14,7 +14,7 @@ jobs:
           name: Install dependencies
           command: npm install
       - persist_to_workspace:
-          root: workspace
+          root: .
           paths:
             - .
   test:
@@ -22,7 +22,7 @@ jobs:
       - image: circleci/node:10.13.0
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: /tmp
       - run:
           name: Run unit tests
           command: npm test
