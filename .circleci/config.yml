@@ -13,20 +13,17 @@ jobs:
       - run:
           name: Install dependencies
           command: npm install
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
   test:
     docker:
       - image: circleci/node:10.13.0
     steps:
-      - attach_workspace:
-          at: .
       - run:
           name: Run unit tests
           command: npm test
   deploy:
+    filter:
+      branches:
+        only: master
     docker:
       - image: circleci/node:10.13.0
     steps:
@@ -46,4 +43,6 @@ workflows:
           type: approval
           requires:
             - test
-      - deploy
+      - deploy:
+          requires:
+            - hold
