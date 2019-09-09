@@ -50,9 +50,9 @@ jobs:
       - run:
           name: Set github name
           command: git config user.name $CIRCLE_USERNAME
-      # - run:
-      #     name: Set version to that in git tag
-      #     command: npm version $CIRCLE_TAG
+      - run:
+          name: Set version to that in git tag
+          command: npm version $CIRCLE_TAG
       - run:
           name: Publish to NPM
           command: npm publish
