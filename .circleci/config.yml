@@ -52,7 +52,7 @@ jobs:
           command: git config user.name $CIRCLE_USERNAME
       - run:
           name: Set version to that in git tag
-          command: npm version $CIRCLE_TAG
+          command: npm --no-git-tag-version version $CIRCLE_TAG
       - run:
           name: Publish to NPM
           command: npm publish
