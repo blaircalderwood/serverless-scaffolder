@@ -108,6 +108,16 @@ yo serverless-scaffolder:iac-lambda
 
 All code will be generated in `iac/lambda`
 
+#### Infrastructure As Code - API Gateway (iac-apigateway)
+
+To generate all associated Terraform to standup API Gateway infrastructure for a dev/test environment. This should be run from the root folder of your generated project. The terraform should be ran after the API Gateway terraform, as it depends on a lambda function being deployed in the same AWS account.
+
+```bash
+yo serverless-scaffolder:iac-apigateway
+```
+
+All code will be generated in `iac/apigateway`
+
 ## License
 
 Apache-2.0 © [Blair Calderwood](https://github.com/blaircalderwood)
