@@ -60,12 +60,21 @@ workflows:
             tags:
               only: /^v.*/
       - test:
+          filters:
+            tags:
+              only: /^v.*/
           requires:
             - build
       - confirm-npm-publish:
+          filters:
+            tags:
+              only: /^v.*/
           type: approval
           requires:
             - test
       - deploy:
+          filters:
+            tags:
+              only: /^v.*/
           requires:
             - confirm-npm-publish
