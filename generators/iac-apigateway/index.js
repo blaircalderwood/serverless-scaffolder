@@ -2,38 +2,24 @@
 const Generator = require('yeoman-generator');
 const kebabCase = require('lodash/kebabCase');
 
-const PromptGenerator = require('../../prompt-generator');
+const PromptsService = require('../../prompts/prompts.service');
 
 module.exports = class extends Generator {
   prompting() {
-    const promptGenerator = new PromptGenerator(this);
+    const promptsService = new PromptsService(this);
 
-    const prompts = [promptGenerator.pathPart];
+    const prompts = [promptsService.pathPart];
 
     if (!this.config.get('awsAccountNumber')) {
-      prompts.push(promptGenerator.awsAccountNumber);
+      prompts.push(promptsService.awsAccountNumber);
     }
 
     if (!this.config.get('awsRegion')) {
-      prompts.push(promptGenerator.awsRegion);
+      prompts.push(promptsService.awsRegion);
     }
 
-    if (!this.config.get('awsAccountNumber')) {
-      prompts.push({
-        type: 'input',
-        name: 'awsAccountNumber',
-        message: 'AWS Account Number:',
-        validate: this._isNumber,
-      });
-    }
-
-    if (!this.config.get('awsRegion')) {
-      prompts.push({
-        type: 'input',
-        name: 'awsRegion',
-        message: 'AWS Region:',
-        validate: this._isValidRegion,
-      });
+    if (!this.config.get('projectName')) {
+      prompts.push(promptsService.projectName);
     }
 
     return this.prompt(prompts).then(props => {
@@ -46,9 +32,11 @@ module.exports = class extends Generator {
 
     const pathPart = this.props.pathPart;
 
-    const awsAccountNumber = this.config.get('awsAccountNumber');
-    const awsRegion = this.config.get('awsRegion');
-    const projectName = this.config.get('projectName');
+    const awsAccountNumber =
+      this.props.awsAccountNumber || this.config.get('awsAccountNumber');
+    const awsRegion = this.props.awsRegion || this.config.get('awsRegion');
+    const projectName =
+      this.props.projectName || this.config.get('projectName');
 
     const mappings = {
       projectNameKebabCase: kebabCase(projectName),

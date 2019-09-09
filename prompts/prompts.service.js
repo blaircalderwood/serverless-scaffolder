@@ -108,7 +108,7 @@ class PromptsService {
     };
   }
 
-  checkLength(str) {
+  _checkLength(str) {
     return str.length < 50
       ? true
       : 'Length limit of 50 characters exceeded. Please choose a shorter name.';
