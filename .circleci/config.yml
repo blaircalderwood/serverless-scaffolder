@@ -11,6 +11,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Echo tag number
+          command: echo Publishing version $CIRCLE_TAG to NPM package
+      - run:
           name: Install dependencies
           command: npm install
       - persist_to_workspace:
