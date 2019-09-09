@@ -104,7 +104,7 @@ class PromptsService {
     return {
       type: 'input',
       name: 'pathPart',
-      message: 'Path part for API Gateway (e.g. /chatbot)',
+      message: 'Path part (resource) for API Gateway (e.g. /chatbot)',
     };
   }
 
