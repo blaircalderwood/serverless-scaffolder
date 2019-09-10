@@ -53,7 +53,16 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test:
+  build_test:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
+      - test:
+          requires:
+            - build
+  build_test_deploy:
     jobs:
       - build:
           filters:
@@ -62,21 +71,12 @@ workflows:
             tags:
               only: /^v.*/
       - test:
-          filters:
-            tags:
-              only: /^v.*/
           requires:
             - build
       - confirm-npm-publish:
-          filters:
-            tags:
-              only: /^v.*/
           type: approval
           requires:
             - test
       - deploy:
-          filters:
-            tags:
-              only: /^v.*/
           requires:
             - confirm-npm-publish
