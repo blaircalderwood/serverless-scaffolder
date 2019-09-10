@@ -100,6 +100,14 @@ class PromptsService {
     };
   }
 
+  get pathPart() {
+    return {
+      type: 'input',
+      name: 'pathPart',
+      message: 'Path part (resource) for API Gateway (e.g. /chatbot)',
+    };
+  }
+
   _checkLength(str) {
     return str.length < 50
       ? true
