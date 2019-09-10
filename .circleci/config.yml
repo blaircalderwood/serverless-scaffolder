@@ -75,10 +75,25 @@ workflows:
       - test:
           requires:
             - build
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
       - confirm-npm-publish:
           type: approval
           requires:
             - test
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
       - deploy:
           requires:
             - confirm-npm-publish
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
