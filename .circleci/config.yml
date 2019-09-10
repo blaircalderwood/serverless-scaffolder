@@ -45,12 +45,6 @@ jobs:
           name: Echo tag number
           command: echo Publishing version $CIRCLE_TAG to NPM package
       - run:
-          name: Set github username
-          command: git config user.email $CIRCLE_USERNAME
-      - run:
-          name: Set github name
-          command: git config user.name $CIRCLE_USERNAME
-      - run:
           name: Set version to that in git tag
           command: npm --no-git-tag-version version $CIRCLE_TAG
       - run:
