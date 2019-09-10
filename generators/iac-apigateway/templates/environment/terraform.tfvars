@@ -7,3 +7,5 @@ region = "<%= awsRegion %>"
 lambda_arn = "arn:aws:lambda:<%= awsRegion %>:<%= awsAccountNumber %>:function:<%= projectNameKebabCase %>-<%= environment %>"
 
 path_part = "<%= pathPart %>"
+
+lambda_name = "<%= projectNameKebabCase %>-<%= environment %>"

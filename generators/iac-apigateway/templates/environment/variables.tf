@@ -18,3 +18,7 @@ variable "path_part" {
   type    = "string"
   default = "api"
 }
+
+variable "lambda_name" {
+  type = "string"
+}
