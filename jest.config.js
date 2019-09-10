@@ -6,12 +6,12 @@ module.exports = {
   coveragePathIgnorePatterns: ['.*.mock.js', './test'],
   testPathIgnorePatterns: ['/node_modules/', '/templates/'],
   coverageDirectory: 'coverage',
-  // coverageThreshold: {
-  //   global: {
-  //     branches: 80,
-  //     functions: 80,
-  //     lines: 80,
-  //   },
-  // },
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+    },
+  },
   testEnvironment: 'node',
 };
