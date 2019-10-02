@@ -3,7 +3,7 @@ const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 
-const PromptGenerator = require('../../prompts/prompts.service');
+const PromptGenerator = require('../non-generator-files/prompts/prompts.service');
 
 module.exports = class extends Generator {
   prompting() {
