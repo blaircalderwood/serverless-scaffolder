@@ -1,6 +1,6 @@
 {
   "name": "generator-serverless-scaffolder",
-  "version": "0.0.3",
+  "version": "1.3.1",
   "description": "Generate Lambda functions deployable with Terraform IAC. Includes Webpack, Jest testing and an optional API Gateway module",
   "homepage": "",
   "author": {
@@ -9,7 +9,8 @@
     "url": ""
   },
   "files": [
-    "generators"
+    "generators",
+    "prompts"
   ],
   "repository": {
     "type": "git",
