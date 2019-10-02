@@ -1,7 +1,7 @@
 'use strict';
 const Generator = require('yeoman-generator');
 
-const PromptsService = require('../../prompts/prompts.service');
+const PromptsService = require('../non-generator-files/prompts/prompts.service');
 
 module.exports = class extends Generator {
   prompting() {

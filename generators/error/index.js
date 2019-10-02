@@ -4,7 +4,7 @@ const camelCase = require('lodash/camelCase');
 const upperFirst = require('lodash/upperFirst');
 const kebabCase = require('lodash/kebabCase');
 
-const PromptGenerator = require('../../prompts/prompts.service');
+const PromptGenerator = require('../non-generator-files/prompts/prompts.service');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
