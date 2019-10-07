@@ -3,18 +3,18 @@ const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 
-beforeAll(() => {
-  const projectName = 'aTestProject';
-  const authorName = 'Johann Bevinder';
-  const authorEmail = 'johann.bevinder@johy.com';
-  const codeCoverage = 90;
-
-  return helpers
-    .run(path.join(__dirname, '.'))
-    .withPrompts({ projectName, authorName, authorEmail, codeCoverage });
-});
-
 describe('app generator', () => {
+  beforeAll(() => {
+    const projectName = 'aTestProject';
+    const authorName = 'Johann Bevinder';
+    const authorEmail = 'johann.bevinder@johy.com';
+    const codeCoverage = 90;
+
+    return helpers
+      .run(path.join(__dirname, '.'))
+      .withPrompts({ projectName, authorName, authorEmail, codeCoverage });
+  });
+
   it('generates a package.json with the correct project name, author name and email', () => {
     assert.fileContent('package.json', /aTestProject/);
     assert.fileContent('package.json', /Johann Bevinder/);
@@ -39,5 +39,23 @@ describe('app generator', () => {
     assert.file('.nvmrc');
     assert.file('.yo-rc.json');
     assert.file('.pre-commit-config.yaml');
+  });
+});
+
+describe('app generator with iac flag', () => {
+  beforeAll(() => {
+    const projectName = 'aTestProject';
+    const authorName = 'Johann Bevinder';
+    const authorEmail = 'johann.bevinder@johy.com';
+    const codeCoverage = 90;
+
+    return helpers
+      .run(path.join(__dirname, '.'))
+      .withArguments(['--iac'])
+      .withPrompts({ projectName, authorName, authorEmail, codeCoverage });
+  });
+
+  it('generates iac folder when iac flag is passed', () => {
+    assert.file('iac/');
   });
 });
