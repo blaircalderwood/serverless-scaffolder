@@ -53,7 +53,8 @@ workflows:
     jobs:
       - build:
           filters:
-            branches: master
+            branches:
+              only: master
       - test:
           requires:
             - build
