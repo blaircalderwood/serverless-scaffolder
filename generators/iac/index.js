@@ -34,5 +34,11 @@ module.exports = class extends Generator {
 
     this.composeWith(require.resolve('../iac-ci'));
     this.composeWith(require.resolve('../iac-lambda'));
+
+    this.option('apigateway');
+
+    if (this.options.apigateway) {
+      this.composeWith(require.resolve('../iac-apigateway'));
+    }
   }
 };
