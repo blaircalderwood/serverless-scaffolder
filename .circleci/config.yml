@@ -45,51 +45,18 @@ jobs:
           command: npm --no-git-tag-version version $CIRCLE_TAG
       - run:
           name: Publish to NPM
-          command: npm publish
+          command: npm publish --tag dev
 
 workflows:
   version: 2
-  build_test:
-    jobs:
-      - build:
-          filters:
-            branches:
-              only: master
-            tags:
-              ignore: /.*/
-      - test:
-          requires:
-            - build
   build_test_deploy:
     jobs:
       - build:
           filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v.*/
+            branches: master
       - test:
           requires:
             - build
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v.*/
-      - confirm-npm-publish:
-          type: approval
-          requires:
-            - test
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v.*/
       - deploy:
           requires:
             - confirm-npm-publish
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v.*/
