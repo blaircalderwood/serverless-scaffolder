@@ -3,15 +3,43 @@ const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 
-beforeAll(() => {
-  const awsRegion = 'eu-west-1';
-
-  return helpers.run(path.join(__dirname, '.')).withPrompts(awsRegion);
-});
-
 describe('Database subgenerator', () => {
-  it('generates a database service and associated test file in the src/database folder', () => {
-    assert.file('src/services/database/database.service.js');
-    assert.file('src/services/database/database.spec.js');
+  describe('AWS region included in config', () => {
+    const awsRegion = 'eu-west-1';
+
+    beforeAll(() => {
+      return helpers
+        .run(path.join(__dirname, '.'))
+        .withLocalConfig({ awsRegion });
+    });
+
+    it('generates a database service and associated test file in the src/database folder with the AWS region found in config', () => {
+      assert.file([
+        'src/services/database/database.service.js',
+        'src/services/database/database.spec.js',
+      ]);
+
+      assert.fileContent(
+        'src/services/database/database.service.js',
+        awsRegion
+      );
+    });
+  });
+
+  describe('AWS region not included in config', () => {
+    const awsRegion = 'eu-west-2';
+
+    beforeAll(() => {
+      return helpers.run(path.join(__dirname, '.')).withPrompts({ awsRegion });
+    });
+
+    it('generates a database service and associated test file in the src/database folder with the AWS region found in prompts', () => {
+      assert.file('src/services/database/database.spec.js');
+
+      assert.fileContent(
+        'src/services/database/database.service.js',
+        awsRegion
+      );
+    });
   });
 });
