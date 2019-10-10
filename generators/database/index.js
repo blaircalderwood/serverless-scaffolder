@@ -24,11 +24,21 @@ module.exports = class extends Generator {
     const mappings = { awsRegion };
 
     this.fs.copyTpl(
-      this.templatePath('./'),
-      this.destinationPath(`./src/services/`),
+      this.templatePath('./database'),
+      this.destinationPath(`./src/services/database`),
+      mappings
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('./errors'),
+      this.destinationPath(`./src/errors/`),
       mappings
     );
 
     this.config.set({ awsRegion });
+  }
+
+  install() {
+    this.npmInstall(['aws-sdk'], { 'save-dev': false });
   }
 };

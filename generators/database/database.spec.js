@@ -17,6 +17,7 @@ describe('Database subgenerator', () => {
       assert.file([
         'src/services/database/database.service.js',
         'src/services/database/database.spec.js',
+        'src/errors/database.error.js',
       ]);
 
       assert.fileContent(
@@ -34,7 +35,10 @@ describe('Database subgenerator', () => {
     });
 
     it('generates a database service and associated test file in the src/database folder with the AWS region found in prompts', () => {
-      assert.file('src/services/database/database.spec.js');
+      assert.file([
+        'src/services/database/database.spec.js',
+        'src/errors/database.error.js',
+      ]);
 
       assert.fileContent(
         'src/services/database/database.service.js',
