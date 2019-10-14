@@ -1,20 +1,13 @@
-const DynamoDb = require('aws-sdk/clients/dynamodb');
 const AWS = require('aws-sdk');
 
-const { DatabaseError } = require('../errors/database.error');
+const { DatabaseError } = require('../../errors/database.error');
 
 let instance;
 
-class DatabaseService {
+class _DatabaseService {
   constructor() {
-    if (instance) {
-      return instance;
-    }
-
-    instance = this;
-
     AWS.config.update({ region: '<%= awsRegion %>' });
-    this.dynamoDb = new DynamoDb({ apiVersion: '2012-08-10' });
+    this.dynamoDb = new AWS.DynamoDB({ apiVersion: '2012-08-10' });
   }
 
   async getItem(tableName, key) {
@@ -32,18 +25,30 @@ class DatabaseService {
     }
   }
 
-  putItem(tableName, item) {
+  async putItem(tableName, item) {
     const params = {
       TableName: tableName,
       Item: item,
     };
 
-    this.dynamoDb.putItem(params, err => {
-      if (err) {
-        throw new DatabaseError(err);
-      }
-    });
+    try {
+      await this.dynamoDb.putItem(params).promise();
+    } catch (err) {
+      throw new DatabaseError(err);
+    }
   }
 }
 
-module.exports = { DatabaseService };
+class DatabaseService {
+  constructor() {
+    if (instance) {
+      return instance;
+    }
+
+    instance = new _DatabaseService();
+
+    return instance;
+  }
+}
+
+module.exports = { DatabaseService, _DatabaseService };

@@ -40,5 +40,6 @@ module.exports = class extends Generator {
 
   install() {
     this.npmInstall(['aws-sdk'], { 'save-dev': false });
+    this.npmInstall(['aws-sdk-mock'], { 'save-dev': true });
   }
 };
