@@ -17,6 +17,10 @@ module.exports = class extends Generator {
       prompts.push(promptsService.awsRegion);
     }
 
+    if (!this.config.get('environments')) {
+      prompts.push(promptsService.environments);
+    }
+
     return this.prompt(prompts).then(props => {
       this.props = props;
     });
@@ -26,10 +30,13 @@ module.exports = class extends Generator {
     const awsAccountNumber =
       this.props.awsAccountNumber || this.config.get('awsAccountNumber');
     const awsRegion = this.props.awsRegion || this.config.get('awsRegion');
+    const environments =
+      this.config.get('environments') || this.props.environments.split(', ');
 
     this.config.set({
       awsRegion,
       awsAccountNumber,
+      environments,
     });
 
     this.composeWith(require.resolve('../iac-ci'));
