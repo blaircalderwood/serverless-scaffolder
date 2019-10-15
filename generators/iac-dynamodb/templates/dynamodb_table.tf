@@ -1,4 +1,4 @@
-resource "aws_dynamodb_table" "bc-table-name-dev" {
+resource "aws_dynamodb_table" "<%= dynamoDbTableName %>" {
   name           = "${var.table_name}"
   read_capacity  = 20
   write_capacity = 20
