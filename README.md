@@ -48,6 +48,45 @@ yo serverless-scaffolder:service
 
 This will create a new service class and Jest test file to unit test the aforementioned class.
 
+### DynamoDB Database Service
+
+To generate a new DynamoDB database service in the `src/services` folder of your generated project run
+
+```bash
+yo serverless-scaffolder:database
+```
+
+This will create a new database service class which interacts with any DynamoDB table provided in the parameters. It will also create a Jest test file with a set of unit tests to test the aforementioned class.
+
+This service has the following methods:
+
+#### getItem
+
+Gets an item from a DynamoDB table when given the table name and the keys. The partition key must be included while the sort is optional. These keys should be included in the following format:
+
+```javaScript
+{
+  nameOfPartitionKey: {S: 'keyValue'},
+  nameOfSortKey: {N: 'keyValue'},
+}
+```
+
+Where `S` and `N` denote strings and numbers respectively. For more information on interactions with DynamoDB getItem visit the [documentation](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB.html#getItem-property).
+
+#### putItem
+
+Puts an item into a DynamoDB table when given the table name and the full item including the keys. The item should be included in the following format:
+
+```javaScript
+{
+  nameOfPartitionKey: {S: 'keyValue'},
+  nameOfSortKey: {N: 'keyValue'},
+  anExampleField: {S: 'an example value'}
+}
+```
+
+Where `S` and `N` denote strings and numbers respectively. For more information on interactions with DynamoDB putItem visit the [documentation](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB.html#putItem-property).
+
 ### Util
 
 To generate a new set of utils in the `src/utils` folder of your generated project run
