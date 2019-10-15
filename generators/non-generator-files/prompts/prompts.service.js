@@ -92,6 +92,16 @@ class PromptsService {
     };
   }
 
+  get environments() {
+    return {
+      type: 'input',
+      name: 'environments',
+      message:
+        'Environments (separate with commas for multiple subnets, leave blank for none):',
+      default: 'dev, test, prod',
+    };
+  }
+
   get errorMessage() {
     return {
       type: 'input',
