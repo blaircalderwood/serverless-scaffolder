@@ -118,6 +118,48 @@ class PromptsService {
     };
   }
 
+  get dynamoDbTableName() {
+    return {
+      type: 'input',
+      name: 'dynamoDbTableName',
+      message: 'DynamoDb table name',
+    };
+  }
+
+  get hashKey() {
+    return {
+      type: 'input',
+      name: 'hashKey',
+      message: 'Hash key name',
+    };
+  }
+
+  get hashKeyType() {
+    return {
+      type: 'list',
+      name: 'hashKeyType',
+      message: 'Hash key type',
+      choices: ['String', 'Binary', 'Number'],
+    };
+  }
+
+  get rangeKey() {
+    return {
+      type: 'input',
+      name: 'rangeKey',
+      message: 'Range key name',
+    };
+  }
+
+  get rangeKeyType() {
+    return {
+      type: 'list',
+      name: 'rangeKeyType',
+      message: 'Range key type',
+      choices: ['String', 'Binary', 'Number'],
+    };
+  }
+
   _checkLength(str) {
     return str.length < 50
       ? true

@@ -3,15 +3,13 @@ const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 
-const PromptGenerator = require('../non-generator-files/prompts/prompts.service');
+const PromptsService = require('../non-generator-files/prompts/prompts.service');
 
 module.exports = class extends Generator {
   prompting() {
-    this.log(
-      yosay(`Welcome to the ${chalk.red('generator-serverless-scaffolder')}!`)
-    );
+    this.log(yosay(`Welcome to the ${chalk.red('Serverless Scaffolder')}!`));
 
-    const promptsService = new PromptGenerator(this);
+    const promptsService = new PromptsService(this);
 
     const prompts = [
       promptsService.projectName,
