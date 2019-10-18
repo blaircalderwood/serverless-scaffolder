@@ -17,19 +17,25 @@ module.exports = class extends Generator {
       prompts.push(promptsService.awsRegion);
     }
 
+    if (!this.config.get('environments')) {
+      prompts.push(promptsService.environments);
+    }
+
     return this.prompt(prompts).then(props => {
       this.props = props;
     });
   }
 
   writing() {
-    const environments = ['dev', 'test'];
-
     const { pipelineName, gitRepo } = this.props;
 
     const awsAccountNumber =
       this.props.awsAccountNumber || this.config.get('awsAccountNumber');
     const awsRegion = this.props.awsRegion || this.config.get('awsRegion');
+
+    const environments =
+      this.config.get('environments') || this.props.environments.split(', ');
+
     const mappings = { pipelineName, awsRegion, awsAccountNumber, gitRepo };
 
     this.destinationRoot('iac');
@@ -80,6 +86,7 @@ module.exports = class extends Generator {
     this.config.set({
       awsRegion,
       awsAccountNumber,
+      environments,
     });
   }
 };

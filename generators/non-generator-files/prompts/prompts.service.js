@@ -92,6 +92,16 @@ class PromptsService {
     };
   }
 
+  get environments() {
+    return {
+      type: 'input',
+      name: 'environments',
+      message:
+        'Environments (separate with commas for multiple subnets, leave blank for none):',
+      default: 'dev, test, prod',
+    };
+  }
+
   get errorMessage() {
     return {
       type: 'input',
@@ -105,6 +115,48 @@ class PromptsService {
       type: 'input',
       name: 'pathPart',
       message: 'Path part (resource) for API Gateway (e.g. /chatbot)',
+    };
+  }
+
+  get dynamoDbTableName() {
+    return {
+      type: 'input',
+      name: 'dynamoDbTableName',
+      message: 'DynamoDb table name',
+    };
+  }
+
+  get hashKey() {
+    return {
+      type: 'input',
+      name: 'hashKey',
+      message: 'Hash key name',
+    };
+  }
+
+  get hashKeyType() {
+    return {
+      type: 'list',
+      name: 'hashKeyType',
+      message: 'Hash key type',
+      choices: ['String', 'Binary', 'Number'],
+    };
+  }
+
+  get rangeKey() {
+    return {
+      type: 'input',
+      name: 'rangeKey',
+      message: 'Range key name',
+    };
+  }
+
+  get rangeKeyType() {
+    return {
+      type: 'list',
+      name: 'rangeKeyType',
+      message: 'Range key type',
+      choices: ['String', 'Binary', 'Number'],
     };
   }
 

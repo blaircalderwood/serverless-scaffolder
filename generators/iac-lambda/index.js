@@ -18,18 +18,23 @@ module.exports = class extends Generator {
       prompts.push(promptsService.awsRegion);
     }
 
+    if (!this.config.get('environments')) {
+      prompts.push(promptsService.environments);
+    }
+
     return this.prompt(prompts).then(props => {
       this.props = props;
     });
   }
 
   writing() {
-    const environments = ['dev', 'test'];
-
     const { awsLambdaSg, awsLambdaSubnets } = this.props;
+    const environments =
+      this.config.get('environments') || this.props.environments.split(', ');
 
     const awsAccountNumber =
       this.props.awsAccountNumber || this.config.get('awsAccountNumber');
+
     const awsRegion = this.props.awsRegion || this.config.get('awsRegion');
     const projectName = this.config.get('projectName');
 
@@ -40,6 +45,7 @@ module.exports = class extends Generator {
       awsAccountNumber,
       awsLambdaSg,
       awsLambdaSubnets,
+      environments,
     };
 
     this.destinationRoot('iac');
@@ -58,6 +64,6 @@ module.exports = class extends Generator {
     );
     this.destinationRoot('../');
 
-    this.config.set({ awsAccountNumber, awsRegion });
+    this.config.set({ awsAccountNumber, awsRegion, environments });
   }
 };
