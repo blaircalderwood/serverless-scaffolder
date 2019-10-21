@@ -97,3 +97,21 @@ describe('app generator', () => {
     });
   });
 });
+
+describe('app generator with iac flag', () => {
+  beforeAll(() => {
+    const projectName = 'aTestProject';
+    const authorName = 'Johann Bevinder';
+    const authorEmail = 'johann.bevinder@johy.com';
+    const codeCoverage = 90;
+
+    return helpers
+      .run(path.join(__dirname, '.'))
+      .withArguments(['--iac'])
+      .withPrompts({ projectName, authorName, authorEmail, codeCoverage });
+  });
+
+  it('generates iac folder when iac flag is passed', () => {
+    assert.file('iac/');
+  });
+});
